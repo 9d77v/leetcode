@@ -1,16 +1,17 @@
 package main
 
 /*
-*题目：给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
-*tips：该字符串只包含小写字母。
-*https://leetcode-cn.com/problems/first-unique-character-in-a-string/
- */
+题目：给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+提示：你可以假定该字符串只包含小写字母。。
+链接：https://leetcode-cn.com/problems/first-unique-character-in-a-string/
+*/
 
 /*
-* 方法一：使用哈希表存储频数
-* 时间复杂度： О(n),2次О(n)遍历
-* 空间复杂度：О(|Σ|)，|Σ|≤26
- */
+方法一：使用哈希表存储频数
+时间复杂度： О(n),2次О(n)遍历
+空间复杂度：О(|Σ|)，|Σ|≤26
+运行时间：8 ms	内存消耗：5.2 MB
+*/
 func firstUniqCharFunc1(s string) int {
 	arr := [26]int{}
 	for _, ch := range s {
@@ -25,12 +26,13 @@ func firstUniqCharFunc1(s string) int {
 }
 
 /*
-* 方法二：使用哈希表存储索引
-* 时间复杂度： О(n)，第一次О(n)，第二次О(|Σ|)
-* 空间复杂度：О(|Σ|)，|Σ|≤26
- */
+方法二：使用哈希表存储索引
+时间复杂度： О(n)，第一次О(n)，第二次О(|Σ|)
+空间复杂度：О(|Σ|)，|Σ|≤26
+运行时间：8 ms	内存消耗：5.2 MB
+*/
 func firstUniqCharFunc2(s string) int {
-	arr := make([]int, 26)
+	arr := [26]int{}
 	n := len(s)
 	for i := range arr {
 		arr[i] = n
@@ -56,10 +58,11 @@ func firstUniqCharFunc2(s string) int {
 }
 
 /*
-* 方法三：队列
-* 时间复杂度： О(n)，遍历字符串О(n)，维护队列时间复杂度О(|Σ|)
-* 空间复杂度：О(|Σ|)，|Σ|≤26 ，一个索引数组，一个队列
- */
+方法三：队列
+时间复杂度： О(n)，遍历字符串О(n)，维护队列时间复杂度О(|Σ|)
+空间复杂度：О(|Σ|)，|Σ|≤26 ，一个索引数组，一个队列
+运行时间：8 ms	内存消耗：5.4 MB
+*/
 func firstUniqCharFunc3(s string) int {
 	type pair struct {
 		ch  byte
