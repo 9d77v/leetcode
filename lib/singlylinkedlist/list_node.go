@@ -6,9 +6,16 @@ type ListNode struct {
 	Next *ListNode
 }
 
-//NewListNode ..
-func NewListNode(val int) *ListNode {
-	return &ListNode{
-		Val: val,
+//NewList ..
+func NewList(data []int) *ListNode {
+	n := &ListNode{}
+	m := n
+	for i, num := range data {
+		n.Val = num
+		if i != len(data)-1 {
+			n.Next = &ListNode{}
+			n = n.Next
+		}
 	}
+	return m
 }

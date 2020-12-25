@@ -13,6 +13,8 @@ import "github.com/9d77v/leetcode/lib/singlylinkedlist"
 
 /*
 方法一：递归
+时间复杂度：О(n)
+空间复杂度：О(n)
 运行时间：4 ms	内存消耗：4.7 MB
 */
 func reversePrintFunc1(head *singlylinkedlist.ListNode) []int {
