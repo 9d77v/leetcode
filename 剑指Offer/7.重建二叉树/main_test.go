@@ -5,11 +5,6 @@ import (
 	"testing"
 )
 
-// 3
-// / \
-// 9  20
-//  /  \
-// 15   7
 type args struct {
 	preorder []int
 	inorder  []int

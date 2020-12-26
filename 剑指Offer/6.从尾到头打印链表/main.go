@@ -1,6 +1,8 @@
 package main
 
-import "github.com/9d77v/leetcode/lib/singlylinkedlist"
+import (
+	. "github.com/9d77v/leetcode/lib/singlylinkedlist"
+)
 
 /*
 题目：输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
@@ -17,7 +19,7 @@ import "github.com/9d77v/leetcode/lib/singlylinkedlist"
 空间复杂度：О(n)
 运行时间：4 ms	内存消耗：4.7 MB
 */
-func reversePrintFunc1(head *singlylinkedlist.ListNode) []int {
+func reversePrintFunc1(head *ListNode) []int {
 	if head == nil {
 		return []int{}
 	}
@@ -31,7 +33,7 @@ func reversePrintFunc1(head *singlylinkedlist.ListNode) []int {
 空间复杂度：О(n)
 运行时间：0 ms	内存消耗：3.1 MB
 */
-func reversePrintFunc2(head *singlylinkedlist.ListNode) []int {
+func reversePrintFunc2(head *ListNode) []int {
 	res := make([]int, 0)
 	for head != nil {
 		res = append(res, head.Val)
@@ -50,7 +52,7 @@ func reversePrintFunc2(head *singlylinkedlist.ListNode) []int {
 空间复杂度：О(n)
 运行时间：0 ms	内存消耗：2.8 MB
 */
-func reversePrintFunc3(head *singlylinkedlist.ListNode) []int {
+func reversePrintFunc3(head *ListNode) []int {
 	n := 0
 	for p := head; p != nil; p = p.Next {
 		n++
