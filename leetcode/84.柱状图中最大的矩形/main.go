@@ -49,25 +49,25 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 	//栈存放下标
 	stack := NewStack(n)
 	for i := 0; i < n; i++ {
-		for stack.IsNotEmpty() && heights[stack.Top().(int)] > heights[i] {
+		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
 		if stack.IsEmpty() {
 			left[i] = -1
 		} else {
-			left[i] = stack.Top().(int)
+			left[i] = stack.Peek().(int)
 		}
 		stack.Push(i)
 	}
 	stack = NewStack(n)
 	for i := n - 1; i > -1; i-- {
-		for stack.IsNotEmpty() && heights[stack.Top().(int)] > heights[i] {
+		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
 		if stack.IsEmpty() {
 			right[i] = n
 		} else {
-			right[i] = stack.Top().(int)
+			right[i] = stack.Peek().(int)
 		}
 		stack.Push(i)
 	}
@@ -89,9 +89,9 @@ func largestRectangleAreaFunc3(heights []int) (max int) {
 	n := len(heights)
 	stack := NewStack(n)
 	for i := 0; i < n; i++ {
-		for stack.IsNotEmpty() && heights[stack.Top().(int)] > heights[i] {
+		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
 			cur := stack.Pop().(int)
-			left := stack.Top().(int) + 1
+			left := stack.Peek().(int) + 1
 			right := i - 1
 			max = Max(max, (right-left+1)*heights[cur])
 		}

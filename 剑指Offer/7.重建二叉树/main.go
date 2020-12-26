@@ -65,7 +65,7 @@ func buildTreeFunc2(preorder []int, inorder []int) *TreeNode {
 			cur = cur.Left
 		} else {
 			j++
-			for !stack.IsEmpty() && stack.Top().(*TreeNode).Val == inorder[j] {
+			for stack.IsNotEmpty() && stack.Peek().(*TreeNode).Val == inorder[j] {
 				cur = stack.Pop().(*TreeNode)
 				j++
 			}
