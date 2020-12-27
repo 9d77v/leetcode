@@ -46,18 +46,15 @@ func maximalRectangleFunc1(matrix [][]byte) (max int) {
 
 //最大矩形面积
 func largestRectangleArea(heights []int) (max int) {
-	//前后补0
-	heights = append([]int{0}, append(heights, 0)...)
-	n := len(heights)
-	stack := NewStack(n)
-	for i := 0; i < n; i++ {
-		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
-			cur := stack.Pop().(int)
-			left := stack.Peek().(int) + 1
-			right := i - 1
-			max = Max(max, (right-left+1)*heights[cur])
+	heights = append(heights, -1)
+	stack := NewMonotonyIncreasingStack(len(heights))
+	stack.Execute(heights, func(topIndex, topValue, i int) {
+		right := i - 1
+		left := 0
+		if stack.IsNotEmpty() {
+			left = stack.Peek().(int) + 1
 		}
-		stack.Push(i)
-	}
+		max = Max(max, (right-left+1)*topValue)
+	})
 	return
 }

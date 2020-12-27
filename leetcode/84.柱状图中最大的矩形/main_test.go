@@ -14,10 +14,10 @@ var tests = []struct {
 	want int
 }{
 	{"test", args{[]int{2, 1, 5, 6, 2, 3}}, 10},
-	// {"test", args{[]int{2, 1, 2}}, 3},
-	// {"test", args{[]int{5, 4, 1, 2}}, 8},
-	// {"test", args{[]int{4, 2, 0, 3, 2, 4, 3, 4}}, 10},
-	// {"test", args{[]int{}}, 0},
+	{"test", args{[]int{2, 1, 2}}, 3},
+	{"test", args{[]int{5, 4, 1, 2}}, 8},
+	{"test", args{[]int{4, 2, 0, 3, 2, 4, 3, 4}}, 10},
+	{"test", args{[]int{}}, 0},
 }
 
 func Test_largestRectangleAreaFunc1(t *testing.T) {

@@ -81,14 +81,18 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 方法三：单调栈+常数优化
 时间复杂度：О(n)
 空间复杂度：О(n)
-运行时间：8 ms	内存消耗：6 MB
+运行时间：8 ms	内存消耗：5.5 MB
 */
 func largestRectangleAreaFunc3(heights []int) (max int) {
+	heights = append(heights, -1)
 	stack := NewMonotonyIncreasingStack(len(heights))
-	stack.Execute(heights, func(top, i int) {
-		left := stack.Peek().(int) + 1
+	stack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
-		max = Max(max, (right-left+1)*top)
+		left := 0
+		if stack.IsNotEmpty() {
+			left = stack.Peek().(int) + 1
+		}
+		max = Max(max, (right-left+1)*topValue)
 	})
 	return
 }
