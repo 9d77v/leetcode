@@ -1,17 +1,31 @@
 package lib
 
-//Max return the bigger number
-func Max(a, b int) int {
-	if a > b {
-		return a
+import "math"
+
+//Max return the maximum number
+func Max(a ...int) int {
+	if len(a) == 0 {
+		return math.MinInt64
 	}
-	return b
+	max := a[0]
+	for _, v := range a {
+		if v > max {
+			max = v
+		}
+	}
+	return max
 }
 
-//Min return the smaller number
-func Min(a, b int) int {
-	if a < b {
-		return a
+//Min return the minimum number
+func Min(a ...int) int {
+	if len(a) == 0 {
+		return math.MinInt64
 	}
-	return b
+	min := a[0]
+	for _, v := range a {
+		if v < min {
+			min = v
+		}
+	}
+	return min
 }
