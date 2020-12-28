@@ -55,10 +55,9 @@ func maxProfitFunc2(prices []int) int {
 	prevProfit0, profit0, profit1 := 0, 0, -prices[0]
 	for i := 1; i < n; i++ {
 		nextProfit0 := Max(profit0, profit1+prices[i])
-		nextProfit1 := Max(profit1, prevProfit0-prices[i])
+		profit1 = Max(profit1, prevProfit0-prices[i])
 		prevProfit0 = profit0
 		profit0 = nextProfit0
-		profit1 = nextProfit1
 	}
 	return profit0
 }

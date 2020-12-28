@@ -19,7 +19,7 @@ import (
 /*
 方法一：单调栈
 时间复杂度：О(n)
-空间复杂度：О(1)
+空间复杂度：О(n)
 运行时间：84 ms	内存消耗：8.8 MB
 */
 func dailyTemperatures(T []int) []int {
