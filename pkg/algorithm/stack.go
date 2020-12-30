@@ -12,19 +12,19 @@ func NewStack(len int) *Stack {
 	}
 }
 
+//Len 长度
+func (s *Stack) Len() int {
+	return len(s.data)
+}
+
 //IsEmpty 判断栈是否为空
 func (s *Stack) IsEmpty() bool {
-	return len(s.data) == 0
+	return s.Len() == 0
 }
 
 //IsNotEmpty 判断栈是否不为空
 func (s *Stack) IsNotEmpty() bool {
-	return len(s.data) != 0
-}
-
-//Size 长度
-func (s *Stack) Size() int {
-	return len(s.data)
+	return s.Len() != 0
 }
 
 //Push 新增元素
@@ -34,12 +34,12 @@ func (s *Stack) Push(v interface{}) {
 
 //Pop 移除栈顶元素
 func (s *Stack) Pop() interface{} {
-	item := s.data[s.Size()-1]
-	s.data = s.data[:s.Size()-1]
+	item := s.data[s.Len()-1]
+	s.data = s.data[:s.Len()-1]
 	return item
 }
 
 //Peek 获取栈顶元素
 func (s *Stack) Peek() interface{} {
-	return s.data[s.Size()-1]
+	return s.data[s.Len()-1]
 }
