@@ -18,6 +18,12 @@ package main
 链接：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof
 */
 
+/*
+方法一：回溯法
+时间复杂度：О(mn)
+空间复杂度：О(mn)
+运行时间：4 ms	内存消耗：3.2 MB
+*/
 func exist(board [][]byte, word string) bool {
 	n := len(board)
 	if n == 0 {
