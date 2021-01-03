@@ -2,6 +2,7 @@ package main
 
 import (
 	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -47,24 +48,24 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 	n := len(heights)
 	left, right := make([]int, n), make([]int, n)
 	//栈存放下标
-	stack := NewStack(n)
+	stack := NewSliceStack(n)
 	for i := 0; i < n; i++ {
-		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
+		for !stack.Empty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
-		if stack.IsEmpty() {
+		if stack.Empty() {
 			left[i] = -1
 		} else {
 			left[i] = stack.Peek().(int)
 		}
 		stack.Push(i)
 	}
-	stack = NewStack(n)
+	stack = NewSliceStack(n)
 	for i := n - 1; i > -1; i-- {
-		for stack.IsNotEmpty() && heights[stack.Peek().(int)] > heights[i] {
+		for !stack.Empty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
-		if stack.IsEmpty() {
+		if stack.Empty() {
 			right[i] = n
 		} else {
 			right[i] = stack.Peek().(int)
@@ -85,12 +86,12 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 */
 func largestRectangleAreaFunc3(heights []int) (max int) {
 	heights = append(heights, -1)
-	stack := NewMonotonyIncreasingStack(len(heights))
-	stack.Execute(heights, func(topIndex, topValue, i int) {
+	monotonicStack := NewMonotonicStack(NewSliceStack(len(heights)), true)
+	monotonicStack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
 		left := 0
-		if stack.IsNotEmpty() {
-			left = stack.Peek().(int) + 1
+		if !monotonicStack.Empty() {
+			left = monotonicStack.Peek().(int) + 1
 		}
 		max = Max(max, (right-left+1)*topValue)
 	})

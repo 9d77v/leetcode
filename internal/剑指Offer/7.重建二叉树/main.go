@@ -1,8 +1,8 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm"
 	. "github.com/9d77v/leetcode/pkg/algorithm/binarytree"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -55,7 +55,7 @@ func buildTreeFunc2(preorder []int, inorder []int) *TreeNode {
 	if preSize == 0 || inSize == 0 || preSize != inSize {
 		return nil
 	}
-	stack := NewStack(preSize)
+	var stack Stack = NewSliceStack(preSize)
 	root := NewTreeNode(preorder[0])
 	cur := root
 	for i, j := 1, 0; i < preSize; i++ {
@@ -65,7 +65,7 @@ func buildTreeFunc2(preorder []int, inorder []int) *TreeNode {
 			cur = cur.Left
 		} else {
 			j++
-			for stack.IsNotEmpty() && stack.Peek().(*TreeNode).Val == inorder[j] {
+			for !stack.Empty() && stack.Peek().(*TreeNode).Val == inorder[j] {
 				cur = stack.Pop().(*TreeNode)
 				j++
 			}

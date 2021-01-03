@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -21,14 +21,14 @@ import (
 */
 
 type CQueue struct {
-	stack1 *Stack
-	stack2 *Stack
+	stack1 Stack
+	stack2 Stack
 }
 
 func Constructor() CQueue {
 	return CQueue{
-		stack1: NewStack(0),
-		stack2: NewStack(0),
+		stack1: NewSliceStack(0),
+		stack2: NewSliceStack(0),
 	}
 }
 
@@ -37,11 +37,11 @@ func (this *CQueue) AppendTail(value int) {
 }
 
 func (this *CQueue) DeleteHead() int {
-	if this.stack2.IsEmpty() {
-		if this.stack1.IsEmpty() {
+	if this.stack2.Empty() {
+		if this.stack1.Empty() {
 			return -1
 		}
-		for this.stack1.IsNotEmpty() {
+		for !this.stack1.Empty() {
 			this.stack2.Push(this.stack1.Pop())
 		}
 	}

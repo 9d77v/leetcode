@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -24,8 +24,8 @@ import (
 */
 func dailyTemperatures(T []int) []int {
 	result := make([]int, len(T))
-	stack := NewMonotonyDecreasingStack(len(T))
-	stack.Execute(T, func(topIndex, topValue, i int) {
+	monotonicStack := NewMonotonicStack(NewSliceStack(len(T)), false)
+	monotonicStack.Execute(T, func(topIndex, topValue, i int) {
 		result[topIndex] = i - topIndex
 	})
 	return result

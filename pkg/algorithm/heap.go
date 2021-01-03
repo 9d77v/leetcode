@@ -33,3 +33,8 @@ func (h *Heap) Pop() interface{} {
 	h.Data = h.Data[:h.Len()-1]
 	return item
 }
+
+//Peek 获h取堆顶元素
+func (h *Heap) Peek() interface{} {
+	return h.Data[0]
+}

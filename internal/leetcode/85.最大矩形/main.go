@@ -2,6 +2,7 @@ package main
 
 import (
 	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -47,12 +48,12 @@ func maximalRectangleFunc1(matrix [][]byte) (max int) {
 //最大矩形面积
 func largestRectangleArea(heights []int) (max int) {
 	heights = append(heights, -1)
-	stack := NewMonotonyIncreasingStack(len(heights))
-	stack.Execute(heights, func(topIndex, topValue, i int) {
+	monotonicStack := NewMonotonicStack(NewSliceStack(len(heights)), true)
+	monotonicStack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
 		left := 0
-		if stack.IsNotEmpty() {
-			left = stack.Peek().(int) + 1
+		if !monotonicStack.Empty() {
+			left = monotonicStack.Peek().(int) + 1
 		}
 		max = Max(max, (right-left+1)*topValue)
 	})

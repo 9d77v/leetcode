@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -34,8 +34,8 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	for i, v := range nums1 {
 		nums1Map[v] = i + 1
 	}
-	stack := NewMonotonyDecreasingStack(n)
-	stack.Execute(nums2, func(topIndex, topValue, i int) {
+	monotonicStack := NewMonotonicStack(NewSliceStack(n), false)
+	monotonicStack.Execute(nums2, func(topIndex, topValue, i int) {
 		if nums1Map[topValue] != 0 {
 			arr[nums1Map[topValue]-1] = nums2[i]
 		}
