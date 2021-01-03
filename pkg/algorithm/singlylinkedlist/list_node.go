@@ -19,3 +19,16 @@ func NewList(data []int) *ListNode {
 	}
 	return m
 }
+
+//ToArray 转数组
+func (l *ListNode) ToArray() []int {
+	if l == nil {
+		return []int{}
+	}
+	res := make([]int, 0)
+	for l != nil {
+		res = append(res, l.Val)
+		l = l.Next
+	}
+	return res
+}

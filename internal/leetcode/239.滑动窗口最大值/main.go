@@ -95,8 +95,7 @@ func (h *hp) pop() [2]int {
 */
 func maxSlidingWindowFunc2(nums []int, k int) []int {
 	monotonicQueue := NewMonotonicQueue(NewSliceDeque(k), false)
-	n := len(nums)
-	res := make([]int, 0, n-k+1)
+	res := make([]int, 0, len(nums)-k+1)
 	monotonicQueue.Execute(nums, func(fronIndex, frontValue int) {
 		res = append(res, frontValue)
 	})
