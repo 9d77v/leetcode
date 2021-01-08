@@ -21,3 +21,18 @@ func Min(a ...int) int {
 	}
 	return min
 }
+
+//Gcd 最大公约数
+func Gcd(a, b int) int {
+	for a != 0 {
+		a, b = b%a, a
+	}
+	return b
+}
+
+//Reverse 反转数组
+func Reverse(a []int) {
+	for i, n := 0, len(a); i < n/2; i++ {
+		a[i], a[n-1-i] = a[n-1-i], a[i]
+	}
+}
