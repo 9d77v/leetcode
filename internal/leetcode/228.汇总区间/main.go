@@ -24,7 +24,8 @@ nums 按升序排列
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/summary-ranges
 */
-func summaryRangesFunc1(nums []int) (res []string) {
+func summaryRangesFunc1(nums []int) []string {
+	res := make([]string, 0)
 	for i, n := 0, len(nums); i < n; {
 		left := i
 		for i++; i < n && nums[i-1]+1 == nums[i]; i++ {
@@ -35,5 +36,5 @@ func summaryRangesFunc1(nums []int) (res []string) {
 		}
 		res = append(res, s)
 	}
-	return
+	return res
 }

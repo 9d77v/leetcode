@@ -29,6 +29,9 @@ func (h *Heap) Push(v interface{}) {
 
 //Pop 移除堆顶元素
 func (h *Heap) Pop() interface{} {
+	if len(h.Data) == 0 {
+		return nil
+	}
 	item := h.Data[h.Len()-1]
 	h.Data = h.Data[:h.Len()-1]
 	return item
