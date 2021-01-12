@@ -1,7 +1,6 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm/queue"
 	. "github.com/9d77v/leetcode/pkg/algorithm/unionfind"
 )
 
@@ -83,17 +82,17 @@ type edge struct {
 func bfs(graph [][]edge, start, end int) float64 {
 	ratios := make([]float64, len(graph))
 	ratios[start] = 1
-	var queue Queue = NewSliceQueue(len(graph))
-	queue.Push(start)
-	for !queue.Empty() {
-		v := queue.Pop().(int)
+	queue := []int{start}
+	for len(queue) > 0 {
+		v := queue[0]
+		queue = queue[1:]
 		if v == end {
 			return ratios[v]
 		}
 		for _, e := range graph[v] {
 			if w := e.to; ratios[w] == 0 {
 				ratios[w] = ratios[v] * e.weight
-				queue.Push(w)
+				queue = append(queue, w)
 			}
 		}
 	}

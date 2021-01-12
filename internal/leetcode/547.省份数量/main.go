@@ -1,7 +1,6 @@
 package main
 
 import (
-	. "github.com/9d77v/leetcode/pkg/algorithm/queue"
 	. "github.com/9d77v/leetcode/pkg/algorithm/unionfind"
 )
 
@@ -73,14 +72,14 @@ func findCircleNumFunc2(isConnected [][]int) int {
 }
 
 func bfs(isConnected [][]int, from int, visited []bool) {
-	queue := NewSliceQueue(len(isConnected))
-	queue.Push(from)
-	for !queue.Empty() {
-		from := queue.Pop().(int)
+	queue := []int{from}
+	for len(queue) > 0 {
+		from := queue[0]
+		queue = queue[1:]
 		visited[from] = true
 		for to, conn := range isConnected[from] {
 			if conn == 1 && !visited[to] {
-				queue.Push(to)
+				queue = append(queue, to)
 			}
 		}
 	}
