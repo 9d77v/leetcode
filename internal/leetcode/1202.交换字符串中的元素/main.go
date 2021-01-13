@@ -30,7 +30,7 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 		return s
 	}
 	n := len(s)
-	uf := NewSimpleUnionFind(n)
+	uf := NewUnionFind(n)
 	for _, v := range pairs {
 		uf.Union(v[0], v[1])
 	}
@@ -52,7 +52,7 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 		root := uf.Find(i)
 		result = append(result, hashMap[root].pop())
 	}
-	return string(result) 
+	return string(result)
 }
 
 type hp struct {

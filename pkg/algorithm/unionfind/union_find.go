@@ -1,15 +1,15 @@
 package unionfind
 
-//SimpleUnionFind 简单并查集
-type SimpleUnionFind struct {
+//UnionFind 简单并查集
+type UnionFind struct {
 	parent []int
 	rank   []int
 	size   int
 }
 
-//NewSimpleUnionFind 初始化带权重的并查集
-func NewSimpleUnionFind(n int) *SimpleUnionFind {
-	uf := &SimpleUnionFind{
+//NewUnionFind 初始化带权重的并查集
+func NewUnionFind(n int) *UnionFind {
+	uf := &UnionFind{
 		parent: make([]int, n),
 		rank:   make([]int, n),
 		size:   n,
@@ -22,7 +22,7 @@ func NewSimpleUnionFind(n int) *SimpleUnionFind {
 }
 
 //Union 合并两个节点,路径压缩，按秩合并
-func (s *SimpleUnionFind) Union(x, y int) bool {
+func (s *UnionFind) Union(x, y int) bool {
 	rootX, rootY := s.Find(x), s.Find(y)
 	if rootX != rootY {
 		if s.rank[rootX] == s.rank[rootY] {
@@ -40,7 +40,7 @@ func (s *SimpleUnionFind) Union(x, y int) bool {
 }
 
 //Find 路径压缩
-func (s *SimpleUnionFind) Find(x int) int {
+func (s *UnionFind) Find(x int) int {
 	if x != s.parent[x] {
 		s.parent[x] = s.Find(s.parent[x])
 	}
@@ -48,12 +48,12 @@ func (s *SimpleUnionFind) Find(x int) int {
 }
 
 //IsConnected 节点是否连通
-func (s *SimpleUnionFind) IsConnected(x, y int) bool {
+func (s *UnionFind) IsConnected(x, y int) bool {
 	rootX, rootY := s.Find(x), s.Find(y)
 	return rootX == rootY
 }
 
 //Size ..
-func (s *SimpleUnionFind) Size() int {
+func (s *UnionFind) Size() int {
 	return s.size
 }

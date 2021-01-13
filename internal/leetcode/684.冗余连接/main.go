@@ -25,15 +25,55 @@ import (
 /*
 方法一：并查集
 时间复杂度：О(nlogn)
-空间复杂度：О(1)
+空间复杂度：О(n)
 运行时间：16 ms	内存消耗：6 MB
 */
-func findRedundantConnection(edges [][]int) []int {
+func findRedundantConnectionFunc1(edges [][]int) []int {
 	n := len(edges)
-	unionFind := NewSimpleUnionFind(n + 1)
+	unionFind := NewUnionFind(n + 1)
 	for _, edge := range edges {
 		if !unionFind.Union(edge[0], edge[1]) {
 			return edge
+		}
+	}
+	return []int{}
+}
+
+/*
+方法二：拓扑排序
+时间复杂度：О(nlogn)
+空间复杂度：О(n)
+运行时间：4 ms	内存消耗：3.5 MB
+*/
+func findRedundantConnectionFunc2(edges [][]int) []int {
+	n := len(edges) + 1
+	graph := make([][]int, n)
+	indegrees := make([]int, n)
+	for _, edge := range edges {
+		graph[edge[0]] = append(graph[edge[0]], edge[1])
+		graph[edge[1]] = append(graph[edge[1]], edge[0])
+		indegrees[edge[0]]++
+		indegrees[edge[1]]++
+	}
+	q := []int{}
+	for i, indegree := range indegrees {
+		if indegree == 1 {
+			q = append(q, i)
+		}
+	}
+	for len(q) > 0 {
+		u := q[0]
+		q = q[1:]
+		for _, v := range graph[u] {
+			indegrees[v]--
+			if indegrees[v] == 1 {
+				q = append(q, v)
+			}
+		}
+	}
+	for i := n - 2; i >= 0; i-- {
+		if indegrees[edges[i][0]] > 1 && indegrees[edges[i][1]] > 1 {
+			return edges[i]
 		}
 	}
 	return []int{}

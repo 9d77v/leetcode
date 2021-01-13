@@ -93,7 +93,7 @@ func bfs(isConnected [][]int, from int, visited []bool) {
 */
 func findCircleNumFunc3(isConnected [][]int) int {
 	n := len(isConnected)
-	unionFind := NewSimpleUnionFind(n)
+	unionFind := NewUnionFind(n)
 	for i, row := range isConnected {
 		for j := i + 1; j < n; j++ {
 			if row[j] == 1 {
