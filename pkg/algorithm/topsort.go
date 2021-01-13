@@ -1,7 +1,13 @@
 package algorithm
 
 //BfsTopSort 拓扑排序广度优先搜索
-func BfsTopSort(graph [][]int, indegrees []int, fn func(u int)) {
+func BfsTopSort(n int, prerequisites [][]int, fn func(u int)) {
+	graph := make([][]int, n)
+	indegrees := make([]int, n)
+	for _, info := range prerequisites {
+		graph[info[1]] = append(graph[info[1]], info[0])
+		indegrees[info[0]]++
+	}
 	queue := []int{}
 	for i, indegree := range indegrees {
 		if indegree == 0 {
@@ -24,7 +30,12 @@ func BfsTopSort(graph [][]int, indegrees []int, fn func(u int)) {
 }
 
 //DfsTopSort 拓扑排序广度优先搜索
-func DfsTopSort(graph [][]int, visited []int, valid bool, fn func(u int)) {
+func DfsTopSort(n int, prerequisites [][]int, valid bool, fn func(u int)) {
+	graph := make([][]int, n)
+	visited := make([]int, n)
+	for _, info := range prerequisites {
+		graph[info[1]] = append(graph[info[1]], info[0])
+	}
 	var dfs func(u int, fn func(u int))
 	dfs = func(u int, fn func(u int)) {
 		visited[u] = 1

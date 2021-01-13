@@ -34,14 +34,8 @@ import (
 运行时间：8 ms	内存消耗：6.2 MB
 */
 func findOrderFunc1(numCourses int, prerequisites [][]int) []int {
-	graph := make([][]int, numCourses)
-	indegrees := make([]int, numCourses)
-	for _, info := range prerequisites {
-		graph[info[1]] = append(graph[info[1]], info[0])
-		indegrees[info[0]]++
-	}
 	result := make([]int, 0)
-	BfsTopSort(graph, indegrees, func(u int) {
+	BfsTopSort(numCourses, prerequisites, func(u int) {
 		result = append(result, u)
 	})
 	if len(result) == numCourses {
@@ -57,21 +51,14 @@ func findOrderFunc1(numCourses int, prerequisites [][]int) []int {
 运行时间：20 ms	内存消耗：6.3 MB
 */
 func findOrderFunc2(numCourses int, prerequisites [][]int) []int {
-	graph := make([][]int, numCourses)
-	visited := make([]int, numCourses)
-	for _, info := range prerequisites {
-		graph[info[1]] = append(graph[info[1]], info[0])
-	}
 	result := make([]int, 0)
 	valid := true
-	DfsTopSort(graph, visited, valid, func(u int) {
+	DfsTopSort(numCourses, prerequisites, valid, func(u int) {
 		result = append(result, u)
 	})
 	if !valid {
 		return []int{}
 	}
-	for i := 0; i < len(result)/2; i++ {
-		result[i], result[numCourses-i-1] = result[numCourses-i-1], result[i]
-	}
+	Reverse(result)
 	return result
 }

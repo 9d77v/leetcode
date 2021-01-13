@@ -22,7 +22,7 @@ func NewSimpleUnionFind(n int) *SimpleUnionFind {
 }
 
 //Union 合并两个节点,路径压缩，按秩合并
-func (s *SimpleUnionFind) Union(x, y int) {
+func (s *SimpleUnionFind) Union(x, y int) bool {
 	rootX, rootY := s.Find(x), s.Find(y)
 	if rootX != rootY {
 		if s.rank[rootX] == s.rank[rootY] {
@@ -34,10 +34,12 @@ func (s *SimpleUnionFind) Union(x, y int) {
 			s.parent[rootY] = rootX
 		}
 		s.size--
+		return true
 	}
+	return false
 }
 
-//路径压缩
+//Find 路径压缩
 func (s *SimpleUnionFind) Find(x int) int {
 	if x != s.parent[x] {
 		s.parent[x] = s.Find(s.parent[x])

@@ -23,13 +23,7 @@ import (
 运行时间：12 ms	内存消耗：6 MB
 */
 func canFinishFunc1(numCourses int, prerequisites [][]int) bool {
-	graph := make([][]int, numCourses)
-	indegrees := make([]int, numCourses)
-	for _, info := range prerequisites {
-		graph[info[1]] = append(graph[info[1]], info[0])
-		indegrees[info[0]]++
-	}
-	BfsTopSort(graph, indegrees, func(u int) {
+	BfsTopSort(numCourses, prerequisites, func(u int) {
 		numCourses--
 	})
 	return numCourses == 0
@@ -42,12 +36,7 @@ func canFinishFunc1(numCourses int, prerequisites [][]int) bool {
 运行时间：20 ms	内存消耗：6.1 MB
 */
 func canFinishFunc2(numCourses int, prerequisites [][]int) bool {
-	graph := make([][]int, numCourses)
-	visited := make([]int, numCourses)
-	for _, info := range prerequisites {
-		graph[info[1]] = append(graph[info[1]], info[0])
-	}
-	DfsTopSort(graph, visited, true, func(u int) {
+	DfsTopSort(numCourses, prerequisites, true, func(u int) {
 		numCourses--
 	})
 	return numCourses == 0
