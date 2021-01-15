@@ -30,9 +30,9 @@ import (
 */
 func findRedundantConnectionFunc1(edges [][]int) []int {
 	n := len(edges)
-	unionFind := NewUnionFind(n + 1)
+	var uf UnionFind = NewArrayUnionFind(n + 1)
 	for _, edge := range edges {
-		if !unionFind.Union(edge[0], edge[1]) {
+		if !uf.Union(edge[0], edge[1]) {
 			return edge
 		}
 	}

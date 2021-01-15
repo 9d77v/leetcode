@@ -30,7 +30,7 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 		return s
 	}
 	n := len(s)
-	uf := NewUnionFind(n)
+	var uf UnionFind = NewArrayUnionFind(n)
 	for _, v := range pairs {
 		uf.Union(v[0], v[1])
 	}
