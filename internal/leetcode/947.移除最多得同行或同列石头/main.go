@@ -33,7 +33,7 @@ func removeStonesFunc1(stones [][]int) (res int) {
 	for _, stone := range stones {
 		uf.Union(stone[0]+10000, stone[1])
 	}
-	return len(stones) - uf.Size()
+	return len(stones) - uf.Count()
 }
 
 /*

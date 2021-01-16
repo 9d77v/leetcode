@@ -4,6 +4,7 @@ package unionfind
 type UnionFind interface {
 	Union(x, y int) bool
 	Find(x int) int
-	Size() int
+	Size(x int) int
+	Count() int
 	IsConnected(x, y int) bool
 }

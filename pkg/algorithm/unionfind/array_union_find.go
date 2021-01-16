@@ -4,7 +4,8 @@ package unionfind
 type ArrayUnionFind struct {
 	parent []int
 	rank   []int
-	size   int
+	size   []int
+	count  int
 }
 
 //NewArrayUnionFind 初始化带权重的并查集
@@ -12,10 +13,12 @@ func NewArrayUnionFind(n int) *ArrayUnionFind {
 	uf := &ArrayUnionFind{
 		parent: make([]int, n),
 		rank:   make([]int, n),
+		size:   make([]int, n),
 	}
 	for i := 0; i < n; i++ {
 		uf.parent[i] = -1
 		uf.rank[i] = 1
+		uf.size[i] = 1
 	}
 	return uf
 }
@@ -27,12 +30,15 @@ func (s *ArrayUnionFind) Union(x, y int) bool {
 		if s.rank[rootX] == s.rank[rootY] {
 			s.parent[rootX] = rootY
 			s.rank[rootY]++
+			s.size[rootY] += s.size[rootX]
 		} else if s.rank[rootX] < s.rank[rootY] {
 			s.parent[rootX] = rootY
+			s.size[rootY] += s.size[rootX]
 		} else {
 			s.parent[rootY] = rootX
+			s.size[rootX] += s.size[rootY]
 		}
-		s.size--
+		s.count--
 		return true
 	}
 	return false
@@ -42,7 +48,7 @@ func (s *ArrayUnionFind) Union(x, y int) bool {
 func (s *ArrayUnionFind) Find(x int) int {
 	if s.parent[x] == -1 {
 		s.parent[x] = x
-		s.size++
+		s.count++
 	}
 	if x != s.parent[x] {
 		s.parent[x] = s.Find(s.parent[x])
@@ -56,7 +62,12 @@ func (s *ArrayUnionFind) IsConnected(x, y int) bool {
 	return rootX == rootY
 }
 
+//Count ..
+func (s *ArrayUnionFind) Count() int {
+	return s.count
+}
+
 //Size ..
-func (s *ArrayUnionFind) Size() int {
-	return s.size
+func (s *ArrayUnionFind) Size(x int) int {
+	return s.size[x]
 }
