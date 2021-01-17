@@ -1,4 +1,8 @@
-package algorithm
+package topsort
+
+import (
+	. "github.com/9d77v/leetcode/pkg/algorithm/queue"
+)
 
 //BfsTopSort 拓扑排序广度优先搜索
 func BfsTopSort(n int, prerequisites [][]int, fn func(u int)) {
@@ -8,25 +12,23 @@ func BfsTopSort(n int, prerequisites [][]int, fn func(u int)) {
 		graph[info[1]] = append(graph[info[1]], info[0])
 		indegrees[info[0]]++
 	}
-	queue := []int{}
+	var queue Queue = NewSliceQueue(n)
 	for i, indegree := range indegrees {
 		if indegree == 0 {
-			queue = append(queue, i)
+			queue.Push(i)
 		}
 	}
-	for len(queue) > 0 {
-		u := queue[0]
-		queue = queue[1:]
+	queue.BFS(func(u interface{}) {
 		if fn != nil {
-			fn(u)
+			fn(u.(int))
 		}
-		for _, v := range graph[u] {
+		for _, v := range graph[u.(int)] {
 			indegrees[v]--
 			if indegrees[v] == 0 {
-				queue = append(queue, v)
+				queue.Push(v)
 			}
 		}
-	}
+	})
 }
 
 //DfsTopSort 拓扑排序广度优先搜索

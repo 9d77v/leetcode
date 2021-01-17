@@ -2,6 +2,7 @@ package main
 
 import (
 	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/topsort"
 )
 
 /*
