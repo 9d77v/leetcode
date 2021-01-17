@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 type args struct {
 	stones [][]int
@@ -21,6 +23,16 @@ func Test_removeStonesFunc1(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotRes := removeStonesFunc1(tt.args.stones); gotRes != tt.wantRes {
 				t.Errorf("removeStonesFunc1() = %v, want %v", gotRes, tt.wantRes)
+			}
+		})
+	}
+}
+
+func Test_removeStonesFunc2(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRes := removeStonesFunc2(tt.args.stones); gotRes != tt.wantRes {
+				t.Errorf("removeStonesFunc2() = %v, want %v", gotRes, tt.wantRes)
 			}
 		})
 	}
