@@ -15,7 +15,7 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。
 0 <= 节点个数 <= 10000
 
 来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof
+链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
 */
 
 func isSubStructure(A *TreeNode, B *TreeNode) (result bool) {

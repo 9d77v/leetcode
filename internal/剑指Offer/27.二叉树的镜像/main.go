@@ -12,7 +12,7 @@ import (
 0 <= 节点个数 <= 1000
 
 来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof
+链接：https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/
 */
 
 func mirrorTree(root *TreeNode) *TreeNode {
