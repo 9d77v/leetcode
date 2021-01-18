@@ -10,4 +10,5 @@ type Deque interface {
 	Back() interface{}
 	Empty() bool
 	Cap() int
+	Len() int
 }

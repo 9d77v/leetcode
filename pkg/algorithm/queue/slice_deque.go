@@ -61,11 +61,7 @@ func (s *SliceDeque) PopFront() interface{} {
 		return nil
 	}
 	v := s.data[0]
-	if len(s.data) == 1 {
-		s.data = s.data[0:0]
-	} else {
-		s.data = s.data[1:]
-	}
+	s.data = s.data[1:]
 	return v
 }
 

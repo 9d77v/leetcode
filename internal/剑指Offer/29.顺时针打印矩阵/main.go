@@ -17,7 +17,6 @@ package main
 空间复杂度：О(mn)
 运行时间：24 ms	内存消耗：6.2 MB
 */
-
 func spiralOrderFunc1(matrix [][]int) []int {
 	rows := len(matrix)
 	if rows == 0 {

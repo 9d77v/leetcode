@@ -16,11 +16,10 @@ func levelOrder(root *TreeNode) []int {
 	if root == nil {
 		return []int{}
 	}
-	var queue Queue = NewSliceQueue(1)
-	queue.Push(root)
 	result := make([]int, 0)
-	queue.BFS(func(top interface{}) {
-		node := top.(*TreeNode)
+	var queue Queue = NewSliceQueue(1, root)
+	queue.BFS(func(front interface{}) {
+		node := front.(*TreeNode)
 		result = append(result, node.Val)
 		if node.Left != nil {
 			queue.Push(node.Left)

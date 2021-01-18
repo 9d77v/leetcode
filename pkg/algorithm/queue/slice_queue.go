@@ -54,11 +54,11 @@ func (s *SliceQueue) Pop() interface{} {
 }
 
 //BFS 广度优先搜索
-func (s *SliceQueue) BFS(fn func(v interface{})) {
+func (s *SliceQueue) BFS(fn func(front interface{})) {
 	for !s.Empty() {
-		u := s.Pop()
+		front := s.Pop()
 		if fn != nil {
-			fn(u)
+			fn(front)
 		}
 	}
 }
