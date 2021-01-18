@@ -1,7 +1,5 @@
 package unionfind
 
-import "errors"
-
 //MapUnionFind 并查集（map存储）
 type MapUnionFind struct {
 	parent   map[int]int
@@ -19,10 +17,7 @@ func NewMapUnionFind() *MapUnionFind {
 }
 
 //NewMapUnionFindWithRank 初始化带秩的并查集
-func NewMapUnionFindWithRank(n int, rankType RankType) (*MapUnionFind, error) {
-	if rankType == RankNone {
-		return nil, errors.New("rankType should not be none")
-	}
+func NewMapUnionFindWithRank(n int, rankType RankType) *MapUnionFind {
 	uf := &MapUnionFind{
 		parent:   make(map[int]int, n),
 		rank:     make(map[int]int, n),
@@ -32,7 +27,7 @@ func NewMapUnionFindWithRank(n int, rankType RankType) (*MapUnionFind, error) {
 		uf.parent[i] = -1
 		uf.rank[i] = 1
 	}
-	return uf, nil
+	return uf
 }
 
 //Union 合并两个节点,路径压缩，按秩合并

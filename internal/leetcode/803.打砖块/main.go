@@ -41,8 +41,7 @@ func hitBricks(grid [][]int, hits [][]int) []int {
 		status[p[0]][p[1]] = 0
 	}
 
-	var uf UnionFind
-	uf, _ = NewArrayUnionFindWithRank(m*n+1, RankSize)
+	var uf UnionFind = NewArrayUnionFindWithRank(m*n+1, RankSize)
 	root := m * n
 	for i, row := range status {
 		for j, v := range row {

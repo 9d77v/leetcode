@@ -1,7 +1,5 @@
 package unionfind
 
-import "errors"
-
 //ArrayUnionFind 并查集（数组存储）
 type ArrayUnionFind struct {
 	parent   []int
@@ -22,10 +20,7 @@ func NewArrayUnionFind(n int) *ArrayUnionFind {
 }
 
 //NewArrayUnionFindWithRank 初始化带秩的并查集
-func NewArrayUnionFindWithRank(n int, rankType RankType) (*ArrayUnionFind, error) {
-	if rankType == RankNone {
-		return nil, errors.New("rankType should not be none")
-	}
+func NewArrayUnionFindWithRank(n int, rankType RankType) *ArrayUnionFind {
 	uf := &ArrayUnionFind{
 		parent:   make([]int, n),
 		rank:     make([]int, n),
@@ -35,7 +30,7 @@ func NewArrayUnionFindWithRank(n int, rankType RankType) (*ArrayUnionFind, error
 		uf.parent[i] = -1
 		uf.rank[i] = 1
 	}
-	return uf, nil
+	return uf
 }
 
 //Union 合并两个节点,路径压缩，按秩合并
