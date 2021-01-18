@@ -1,39 +1,66 @@
 package unionfind
 
+import "errors"
+
 //MapUnionFind 并查集（map存储）
 type MapUnionFind struct {
-	parent map[int]int
-	rank   map[int]int
-	size   map[int]int
-	count  int
+	parent   map[int]int
+	rank     map[int]int
+	size     int
+	rankType RankType
 }
 
-//NewMapUnionFind 初始化带权重的并查集
-func NewMapUnionFind(n int) *MapUnionFind {
+//NewMapUnionFind 初始化并查集
+func NewMapUnionFind() *MapUnionFind {
 	uf := &MapUnionFind{
-		parent: make(map[int]int, n),
-		rank:   make(map[int]int, n),
-		size:   make(map[int]int, n),
+		parent: make(map[int]int, 0),
 	}
 	return uf
+}
+
+//NewMapUnionFindWithRank 初始化带秩的并查集
+func NewMapUnionFindWithRank(n int, rankType RankType) (*MapUnionFind, error) {
+	if rankType == RankNone {
+		return nil, errors.New("rankType should not be none")
+	}
+	uf := &MapUnionFind{
+		parent:   make(map[int]int, n),
+		rank:     make(map[int]int, n),
+		rankType: rankType,
+	}
+	for i := 0; i < n; i++ {
+		uf.parent[i] = -1
+		uf.rank[i] = 1
+	}
+	return uf, nil
 }
 
 //Union 合并两个节点,路径压缩，按秩合并
 func (s *MapUnionFind) Union(x, y int) bool {
 	rootX, rootY := s.Find(x), s.Find(y)
 	if rootX != rootY {
-		if s.rank[rootX] == s.rank[rootY] {
+		switch s.rankType {
+		case RankNone:
 			s.parent[rootX] = rootY
-			s.rank[rootY]++
-			s.size[rootY] += s.size[rootX]
-		} else if s.rank[rootX] < s.rank[rootY] {
-			s.parent[rootX] = rootY
-			s.size[rootY] += s.size[rootX]
-		} else {
-			s.parent[rootY] = rootX
-			s.size[rootX] += s.size[rootY]
+		case RankHeight:
+			if s.rank[rootX] == s.rank[rootY] {
+				s.parent[rootX] = rootY
+				s.rank[rootY]++
+			} else if s.rank[rootX] < s.rank[rootY] {
+				s.parent[rootX] = rootY
+			} else {
+				s.parent[rootY] = rootX
+			}
+		case RankSize:
+			if s.rank[rootX] <= s.rank[rootY] {
+				s.parent[rootX] = rootY
+				s.rank[rootY] += s.rank[rootX]
+			} else {
+				s.parent[rootY] = rootX
+				s.rank[rootX] += s.rank[rootY]
+			}
 		}
-		s.count--
+		s.size--
 		return true
 	}
 	return false
@@ -43,7 +70,7 @@ func (s *MapUnionFind) Union(x, y int) bool {
 func (s *MapUnionFind) Find(x int) int {
 	if _, ok := s.parent[x]; !ok {
 		s.parent[x] = x
-		s.count++
+		s.size++
 	}
 	if x != s.parent[x] {
 		s.parent[x] = s.Find(s.parent[x])
@@ -56,12 +83,12 @@ func (s *MapUnionFind) IsConnected(x, y int) bool {
 	return s.Find(x) == s.Find(y)
 }
 
-//Count ..
-func (s *MapUnionFind) Count() int {
-	return s.count
+//Size ..
+func (s *MapUnionFind) Size() int {
+	return s.size
 }
 
-//Size ..
-func (s *MapUnionFind) Size(x int) int {
-	return s.size[x]
+//Rank ..
+func (s *MapUnionFind) Rank(x int) int {
+	return s.rank[x]
 }

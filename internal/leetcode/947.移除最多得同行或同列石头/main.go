@@ -33,7 +33,7 @@ func removeStonesFunc1(stones [][]int) (res int) {
 	for _, stone := range stones {
 		uf.Union(stone[0]+10000, stone[1])
 	}
-	return len(stones) - uf.Count()
+	return len(stones) - uf.Size()
 }
 
 /*
@@ -43,9 +43,9 @@ func removeStonesFunc1(stones [][]int) (res int) {
 运行时间：20 ms	内存消耗：7.4 MB
 */
 func removeStonesFunc2(stones [][]int) (res int) {
-	var uf UnionFind = NewMapUnionFind(len(stones))
+	var uf UnionFind = NewMapUnionFind()
 	for _, stone := range stones {
 		uf.Union(stone[0]+10000, stone[1])
 	}
-	return len(stones) - uf.Count()
+	return len(stones) - uf.Size()
 }
