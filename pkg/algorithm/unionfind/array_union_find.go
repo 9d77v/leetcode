@@ -4,7 +4,7 @@ package unionfind
 type ArrayUnionFind struct {
 	parent   []int
 	rank     []int
-	size     int
+	count    int
 	rankType RankType
 }
 
@@ -42,23 +42,19 @@ func (s *ArrayUnionFind) Union(x, y int) bool {
 			s.parent[rootX] = rootY
 		case RankHeight:
 			if s.rank[rootX] == s.rank[rootY] {
-				s.parent[rootX] = rootY
 				s.rank[rootY]++
-			} else if s.rank[rootX] < s.rank[rootY] {
-				s.parent[rootX] = rootY
-			} else {
-				s.parent[rootY] = rootX
+			} else if s.rank[rootX] > s.rank[rootY] {
+				rootX, rootY = rootY, rootX
 			}
+			s.parent[rootX] = rootY
 		case RankSize:
-			if s.rank[rootX] <= s.rank[rootY] {
-				s.parent[rootX] = rootY
-				s.rank[rootY] += s.rank[rootX]
-			} else {
-				s.parent[rootY] = rootX
-				s.rank[rootX] += s.rank[rootY]
+			if s.rank[rootX] >= s.rank[rootY] {
+				rootX, rootY = rootY, rootX
 			}
+			s.parent[rootX] = rootY
+			s.rank[rootY] += s.rank[rootX]
 		}
-		s.size--
+		s.count--
 		return true
 	}
 	return false
@@ -68,7 +64,7 @@ func (s *ArrayUnionFind) Union(x, y int) bool {
 func (s *ArrayUnionFind) Find(x int) int {
 	if s.parent[x] == -1 {
 		s.parent[x] = x
-		s.size++
+		s.count++
 	}
 	if x != s.parent[x] {
 		s.parent[x] = s.Find(s.parent[x])
@@ -81,9 +77,9 @@ func (s *ArrayUnionFind) IsConnected(x, y int) bool {
 	return s.Find(x) == s.Find(y)
 }
 
-//Size ..
-func (s *ArrayUnionFind) Size() int {
-	return s.size
+//Count ..
+func (s *ArrayUnionFind) Count() int {
+	return s.count
 }
 
 //Rank ..

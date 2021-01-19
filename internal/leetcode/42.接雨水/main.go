@@ -27,7 +27,7 @@ n == height.length
 func trapFunc1(height []int) (max int) {
 	monotonicStack := NewMonotonicStack(NewSliceStack(len(height)), false)
 	monotonicStack.Execute(height, func(topIndex, topValue, i int) {
-		if !monotonicStack.Empty() {
+		if !monotonicStack.IsEmpty() {
 			d := i - monotonicStack.Peek().(int) - 1
 			min := Min(height[monotonicStack.Peek().(int)], height[i])
 			max += d * (min - topValue)

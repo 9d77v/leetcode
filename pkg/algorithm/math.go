@@ -30,6 +30,14 @@ func Gcd(a, b int) int {
 	return b
 }
 
+//Abs 绝对值
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
 //Reverse 反转数组
 func Reverse(a []int) {
 	for i, n := 0, len(a); i < n/2; i++ {

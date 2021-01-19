@@ -23,8 +23,8 @@ func (s *SliceStack) Len() int {
 	return len(s.data)
 }
 
-//Empty 判断栈是否为空
-func (s *SliceStack) Empty() bool {
+//IsEmpty 判断栈是否为空
+func (s *SliceStack) IsEmpty() bool {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	return len(s.data) == 0

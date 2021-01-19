@@ -48,12 +48,12 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 	n := len(heights)
 	left, right := make([]int, n), make([]int, n)
 	//栈存放下标
-	stack := NewSliceStack(n)
+	var stack Stack = NewSliceStack(n)
 	for i := 0; i < n; i++ {
-		for !stack.Empty() && heights[stack.Peek().(int)] > heights[i] {
+		for !stack.IsEmpty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
-		if stack.Empty() {
+		if stack.IsEmpty() {
 			left[i] = -1
 		} else {
 			left[i] = stack.Peek().(int)
@@ -62,10 +62,10 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 	}
 	stack = NewSliceStack(n)
 	for i := n - 1; i > -1; i-- {
-		for !stack.Empty() && heights[stack.Peek().(int)] > heights[i] {
+		for !stack.IsEmpty() && heights[stack.Peek().(int)] > heights[i] {
 			stack.Pop()
 		}
-		if stack.Empty() {
+		if stack.IsEmpty() {
 			right[i] = n
 		} else {
 			right[i] = stack.Peek().(int)
@@ -90,7 +90,7 @@ func largestRectangleAreaFunc3(heights []int) (max int) {
 	monotonicStack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
 		left := 0
-		if !monotonicStack.Empty() {
+		if !monotonicStack.IsEmpty() {
 			left = monotonicStack.Peek().(int) + 1
 		}
 		max = Max(max, (right-left+1)*topValue)

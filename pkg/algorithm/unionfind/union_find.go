@@ -15,6 +15,6 @@ type UnionFind interface {
 	Union(x, y int) bool
 	Find(x int) int
 	Rank(x int) int
-	Size() int
+	Count() int
 	IsConnected(x, y int) bool
-}
+} 

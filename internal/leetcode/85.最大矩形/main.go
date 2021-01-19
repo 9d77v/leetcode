@@ -52,7 +52,7 @@ func largestRectangleArea(heights []int) (max int) {
 	monotonicStack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
 		left := 0
-		if !monotonicStack.Empty() {
+		if !monotonicStack.IsEmpty() {
 			left = monotonicStack.Peek().(int) + 1
 		}
 		max = Max(max, (right-left+1)*topValue)

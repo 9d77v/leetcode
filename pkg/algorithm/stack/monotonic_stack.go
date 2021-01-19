@@ -17,7 +17,7 @@ func NewMonotonicStack(stack Stack, isAsc bool) *MonotonicStack {
 //Execute 存index
 func (m *MonotonicStack) Execute(data []int, fn func(topIndex, topValue, i int)) {
 	for i := 0; i < len(data); i++ {
-		for !m.Empty() && m.compare(data[m.Peek().(int)], data[i]) {
+		for !m.IsEmpty() && m.compare(data[m.Peek().(int)], data[i]) {
 			top := m.Pop().(int)
 			if fn != nil {
 				fn(top, data[top], i)

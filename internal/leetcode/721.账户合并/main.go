@@ -37,7 +37,7 @@ func accountsMerge(accounts [][]string) [][]string {
 			uf.Union(idStrMap[account[i]], firstIndex)
 		}
 	}
-	dMap := make(map[int][]string, uf.Size())
+	dMap := make(map[int][]string, uf.Count())
 	for i := 0; i < len(idMap); i++ {
 		key := uf.Find(i)
 		dMap[key] = append(dMap[key], idMap[i])

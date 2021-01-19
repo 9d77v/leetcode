@@ -33,7 +33,7 @@ func reverseListFunc1(head *ListNode) *ListNode {
 	}
 	reverseHead := stack.Pop().(*ListNode)
 	p := reverseHead
-	for !stack.Empty() {
+	for !stack.IsEmpty() {
 		p.Next = stack.Pop().(*ListNode)
 		p = p.Next
 	}

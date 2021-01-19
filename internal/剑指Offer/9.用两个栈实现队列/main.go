@@ -37,11 +37,11 @@ func (this *CQueue) AppendTail(value int) {
 }
 
 func (this *CQueue) DeleteHead() int {
-	if this.stack2.Empty() {
-		if this.stack1.Empty() {
+	if this.stack2.IsEmpty() {
+		if this.stack1.IsEmpty() {
 			return -1
 		}
-		for !this.stack1.Empty() {
+		for !this.stack1.IsEmpty() {
 			this.stack2.Push(this.stack1.Pop())
 		}
 	}
