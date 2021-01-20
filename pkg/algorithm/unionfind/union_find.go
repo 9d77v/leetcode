@@ -14,7 +14,8 @@ const (
 type UnionFind interface {
 	Union(x, y int) bool
 	Find(x int) int
-	Rank(x int) int
-	Count() int
 	IsConnected(x, y int) bool
+	Count() int
+	Rank(x int) int
+	Has(x int) bool
 }

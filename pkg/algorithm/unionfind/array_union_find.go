@@ -34,55 +34,60 @@ func NewArrayUnionFindWithRank(n int, rankType RankType) *ArrayUnionFind {
 }
 
 //Union 合并两个节点,按秩合并
-func (s *ArrayUnionFind) Union(x, y int) bool {
-	rootX, rootY := s.Find(x), s.Find(y)
+func (uf *ArrayUnionFind) Union(x, y int) bool {
+	rootX, rootY := uf.Find(x), uf.Find(y)
 	if rootX != rootY {
-		switch s.rankType {
+		switch uf.rankType {
 		case RankNone:
-			s.parent[rootX] = rootY
+			uf.parent[rootX] = rootY
 		case RankHeight:
-			if s.rank[rootX] == s.rank[rootY] {
-				s.rank[rootY]++
-			} else if s.rank[rootX] > s.rank[rootY] {
+			if uf.rank[rootX] == uf.rank[rootY] {
+				uf.rank[rootY]++
+			} else if uf.rank[rootX] > uf.rank[rootY] {
 				rootX, rootY = rootY, rootX
 			}
-			s.parent[rootX] = rootY
+			uf.parent[rootX] = rootY
 		case RankSize:
-			if s.rank[rootX] >= s.rank[rootY] {
+			if uf.rank[rootX] >= uf.rank[rootY] {
 				rootX, rootY = rootY, rootX
 			}
-			s.parent[rootX] = rootY
-			s.rank[rootY] += s.rank[rootX]
+			uf.parent[rootX] = rootY
+			uf.rank[rootY] += uf.rank[rootX]
 		}
-		s.count--
+		uf.count--
 		return true
 	}
 	return false
 }
 
 //Find 路径压缩
-func (s *ArrayUnionFind) Find(x int) int {
-	if s.parent[x] == -1 {
-		s.parent[x] = x
-		s.count++
+func (uf *ArrayUnionFind) Find(x int) int {
+	if uf.parent[x] == -1 {
+		uf.parent[x] = x
+		uf.count++
 	}
-	if x != s.parent[x] {
-		s.parent[x] = s.Find(s.parent[x])
+	if x != uf.parent[x] {
+		uf.parent[x] = uf.Find(uf.parent[x])
 	}
-	return s.parent[x]
+	return uf.parent[x]
 }
 
 //IsConnected 节点是否连通
-func (s *ArrayUnionFind) IsConnected(x, y int) bool {
-	return s.Find(x) == s.Find(y)
+func (uf *ArrayUnionFind) IsConnected(x, y int) bool {
+	return uf.Find(x) == uf.Find(y)
 }
 
 //Count ..
-func (s *ArrayUnionFind) Count() int {
-	return s.count
+func (uf *ArrayUnionFind) Count() int {
+	return uf.count
 }
 
 //Rank ..
-func (s *ArrayUnionFind) Rank(x int) int {
-	return s.rank[x]
+func (uf *ArrayUnionFind) Rank(x int) int {
+	return uf.rank[x]
+}
+
+//Has ..
+func (uf *ArrayUnionFind) Has(x int) bool {
+	return uf.parent[x] != -1
 }
