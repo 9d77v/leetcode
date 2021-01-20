@@ -5,6 +5,7 @@ type ArrayUnionFind struct {
 	parent   []int
 	rank     []int
 	count    int
+	size     int
 	rankType RankType
 }
 
@@ -65,6 +66,7 @@ func (uf *ArrayUnionFind) Find(x int) int {
 	if uf.parent[x] == -1 {
 		uf.parent[x] = x
 		uf.count++
+		uf.size++
 	}
 	if x != uf.parent[x] {
 		uf.parent[x] = uf.Find(uf.parent[x])
@@ -80,6 +82,11 @@ func (uf *ArrayUnionFind) IsConnected(x, y int) bool {
 //Count ..
 func (uf *ArrayUnionFind) Count() int {
 	return uf.count
+}
+
+//Size ..
+func (uf *ArrayUnionFind) Size() int {
+	return uf.size
 }
 
 //Rank ..

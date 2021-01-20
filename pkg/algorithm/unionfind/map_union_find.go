@@ -78,6 +78,11 @@ func (uf *MapUnionFind) Count() int {
 	return uf.count
 }
 
+//Size ..
+func (uf *MapUnionFind) Size() int {
+	return len(uf.parent)
+}
+
 //Rank ..
 func (uf *MapUnionFind) Rank(x int) int {
 	return uf.rank[x]
