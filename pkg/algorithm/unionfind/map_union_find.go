@@ -30,7 +30,7 @@ func NewMapUnionFindWithRank(n int, rankType RankType) *MapUnionFind {
 	return uf
 }
 
-//Union 合并两个节点,路径压缩，按秩合并
+//Union 合并两个节点,按秩合并
 func (s *MapUnionFind) Union(x, y int) bool {
 	rootX, rootY := s.Find(x), s.Find(y)
 	if rootX != rootY {
