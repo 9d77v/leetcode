@@ -17,4 +17,4 @@ type UnionFind interface {
 	Rank(x int) int
 	Count() int
 	IsConnected(x, y int) bool
-} 
+}
