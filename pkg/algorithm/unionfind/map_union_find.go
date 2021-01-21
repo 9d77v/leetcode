@@ -5,23 +5,26 @@ type MapUnionFind struct {
 	parent   map[int]int
 	rank     map[int]int
 	count    int
+	cap      int
 	rankType RankType
 }
 
 //NewMapUnionFind 初始化并查集
-func NewMapUnionFind() *MapUnionFind {
+func NewMapUnionFind(n int) *MapUnionFind {
 	uf := &MapUnionFind{
-		parent: make(map[int]int, 0),
+		parent: make(map[int]int, n),
+		cap:    n,
 	}
 	return uf
 }
 
 //NewMapUnionFindWithRank 初始化带秩的并查集
-func NewMapUnionFindWithRank(rankType RankType) *MapUnionFind {
+func NewMapUnionFindWithRank(n int, rankType RankType) *MapUnionFind {
 	uf := &MapUnionFind{
 		parent:   make(map[int]int, 0),
 		rank:     make(map[int]int, 0),
 		rankType: rankType,
+		cap:      n,
 	}
 	return uf
 }
@@ -68,28 +71,33 @@ func (uf *MapUnionFind) Find(x int) int {
 	return uf.parent[x]
 }
 
-//IsConnected 节点是否连通
+//IsConnected 结点是否连通
 func (uf *MapUnionFind) IsConnected(x, y int) bool {
 	return uf.Find(x) == uf.Find(y)
 }
 
-//Count ..
+//Count 连通树的数量
 func (uf *MapUnionFind) Count() int {
 	return uf.count
 }
 
-//Size ..
+//Size 结点总数
 func (uf *MapUnionFind) Size() int {
 	return len(uf.parent)
 }
 
-//Rank ..
+//Rank 结点所在树的高度或结点数
 func (uf *MapUnionFind) Rank(x int) int {
 	return uf.rank[x]
 }
 
-//Has ..
+//Has 是否存在某一结点
 func (uf *MapUnionFind) Has(x int) bool {
 	_, ok := uf.parent[x]
 	return ok
+}
+
+//Cap 初始化容量
+func (uf *MapUnionFind) Cap() int {
+	return uf.cap
 }

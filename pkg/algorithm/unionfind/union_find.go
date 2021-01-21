@@ -14,9 +14,10 @@ const (
 type UnionFind interface {
 	Union(x, y int) bool       //按秩合并
 	Find(x int) int            //路径压缩
-	IsConnected(x, y int) bool //判断是否连通
+	IsConnected(x, y int) bool //结点是否连通
 	Count() int                //连通树的数量
-	Size() int                 //总节点数
-	Rank(x int) int            //某一个节点所在树的高度或节点数量
-	Has(x int) bool            //是否存在某一节点
+	Size() int                 //结点总数
+	Cap() int                  //初始化容量
+	Rank(x int) int            //结点所在树的高度或结点数
+	Has(x int) bool            //是否存在某一结点
 }

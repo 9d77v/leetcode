@@ -33,7 +33,7 @@ ai != bi
 运行时间：296 ms	内存消耗 27.7 MB
 */
 func minimumHammingDistance(source []int, target []int, allowedSwaps [][]int) (result int) {
-	var uf UnionFind = NewMapUnionFindWithRank(RankSize)
+	var uf UnionFind = NewMapUnionFindWithRank(0, RankSize)
 	for _, v := range allowedSwaps {
 		uf.Union(v[0], v[1])
 	}

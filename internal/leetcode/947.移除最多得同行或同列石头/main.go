@@ -43,7 +43,7 @@ func removeStonesFunc1(stones [][]int) (res int) {
 运行时间：20 ms	内存消耗：7.4 MB
 */
 func removeStonesFunc2(stones [][]int) (res int) {
-	var uf UnionFind = NewMapUnionFind()
+	var uf UnionFind = NewMapUnionFind(0)
 	for _, stone := range stones {
 		uf.Union(stone[0]+10000, stone[1])
 	}
