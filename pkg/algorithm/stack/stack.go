@@ -8,4 +8,5 @@ type Stack interface {
 	Pop() interface{}
 	Peek() interface{}
 	Clear()
+	Iterator(func(i int, v interface{}))
 }

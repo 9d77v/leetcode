@@ -9,11 +9,15 @@ type SliceStack struct {
 }
 
 //NewSliceStack 初始化栈
-func NewSliceStack(len int) *SliceStack {
-	return &SliceStack{
+func NewSliceStack(len int, data ...interface{}) *SliceStack {
+	s := &SliceStack{
 		data:  make([]interface{}, 0, len),
 		mutex: &sync.Mutex{},
 	}
+	for _, v := range data {
+		s.Push(v)
+	}
+	return s
 }
 
 //Len 长度
@@ -64,4 +68,13 @@ func (s *SliceStack) Clear() {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.data = s.data[0:0]
+}
+
+//Iterator 遍历栈中元素
+func (s *SliceStack) Iterator(fn func(i int, v interface{})) {
+	for i, v := range s.data {
+		if fn != nil {
+			fn(i, v)
+		}
+	}
 }
