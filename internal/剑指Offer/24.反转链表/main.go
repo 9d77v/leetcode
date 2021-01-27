@@ -49,11 +49,29 @@ func reverseListFunc1(head *ListNode) *ListNode {
 */
 func reverseListFunc2(head *ListNode) *ListNode {
 	var prev *ListNode
-	for head != nil {
-		next := head.Next
-		head.Next = prev
-		prev = head
-		head = next
+	cur := head
+	for cur != nil {
+		prev = &ListNode{
+			Val:  cur.Val,
+			Next: prev,
+		}
+		cur = cur.Next
 	}
 	return prev
+}
+
+/*
+方法三： 递归n
+时间复杂度：О(n)
+空间复杂度：О(n)
+运行时间：0 ms	内存消耗：2.5 MB
+*/
+func reverseListFunc3(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	newHead := reverseListFunc3(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return newHead
 }
