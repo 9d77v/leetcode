@@ -13,8 +13,11 @@ var tests = []struct {
 	args args
 	want int
 }{
-	{"test findRepeatNumber", args{[]int{2, 3, 5, 4, 3, 2, 6, 7}}, 3},
-	{"test findRepeatNumber", args{[]int{1, 2, 2}}, 2},
+	{"test findRepeatNumber", args{[]int{2, 3, 5, 4, 1, 2, 6, 7}}, 2},
+	{"test findRepeatNumber", args{[]int{1, 1, 2}}, 1},
+	{"test findRepeatNumber", args{[]int{1, 1}}, 1},
+	{"test findRepeatNumber", args{[]int{1, 3, 4, 2, 2}}, 2},
+	{"test findRepeatNumber", args{[]int{3, 1, 3, 4, 2}}, 3},
 }
 
 func Test_findRepeatNumberFunc1(t *testing.T) {

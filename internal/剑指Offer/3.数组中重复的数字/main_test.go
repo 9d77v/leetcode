@@ -14,6 +14,7 @@ var tests = []struct {
 	want int
 }{
 	{"test findRepeatNumber", args{[]int{2, 3, 1, 0, 2, 5, 3}}, 2},
+	{"test findRepeatNumber", args{[]int{1, 2, 2}}, 2},
 }
 
 func Test_findRepeatNumberFunc1(t *testing.T) {
@@ -31,16 +32,6 @@ func Test_findRepeatNumberFunc2(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := findRepeatNumberFunc2(tt.args.nums); got != tt.want {
 				t.Errorf("findRepeatNumberFunc2() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Test_findRepeatNumberFunc3(t *testing.T) {
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := findRepeatNumberFunc3(tt.args.nums); got != tt.want {
-				t.Errorf("findRepeatNumberFunc3() = %v, want %v", got, tt.want)
 			}
 		})
 	}

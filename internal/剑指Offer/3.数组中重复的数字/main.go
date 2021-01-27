@@ -11,8 +11,8 @@ import "sort"
 */
 
 /*
-方法一：排序后相邻数比较
-时间复杂度：О(n)
+方法一：排序后相邻数比较,改变原数组
+时间复杂度：О(nlogn)
 空间复杂度：О(1)
 运行时间：52 ms	内存消耗：8.7 MB
 */
@@ -27,37 +27,19 @@ func findRepeatNumberFunc1(nums []int) int {
 }
 
 /*
-方法二：哈希表
-时间复杂度：О(n)
-空间复杂度：О(n)
-运行时间：40 ms	内存消耗：8 MB
-*/
-func findRepeatNumberFunc2(nums []int) int {
-	arr := make([]int, len(nums))
-	for _, num := range nums {
-		if arr[num] == 1 {
-			return num
-		}
-		arr[num] = 1
-	}
-	return -1
-}
-
-/*
-方法三：原地置换
+方法二：原地置换,改变原数组
 时间复杂度：О(n)
 空间复杂度：О(1)
 运行时间：36 ms	内存消耗：8.7 MB
 */
-func findRepeatNumberFunc3(nums []int) int {
-	for i, num := range nums {
-		if i == num {
-			continue
+func findRepeatNumberFunc2(nums []int) int {
+	for i := range nums {
+		for i != nums[i] {
+			if nums[i] == nums[nums[i]] {
+				return nums[i]
+			}
+			nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
 		}
-		if num == nums[num] {
-			return num
-		}
-		nums[i], nums[num] = nums[num], nums[i]
 	}
 	return -1
 }
