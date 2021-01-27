@@ -81,7 +81,7 @@ func (uf *ArrayUnionFind) IsConnected(x, y int) bool {
 
 //Count 连通树的数量
 func (uf *ArrayUnionFind) Count() int {
-	return uf.count + uf.cap - uf.size
+	return uf.count
 }
 
 //Size 结点总数

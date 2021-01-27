@@ -48,7 +48,7 @@ func maxNumEdgesToRemove(n int, edges [][]int) int {
 			}
 		}
 	}
-	if uf1.Count() == 2 && uf2.Count() == 2 {
+	if uf1.Count() == 1 && uf2.Count() == 1 && uf1.Size() == n && uf2.Size() == n {
 		return result
 	}
 	return -1
