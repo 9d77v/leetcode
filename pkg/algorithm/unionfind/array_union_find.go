@@ -42,22 +42,19 @@ func (uf *ArrayUnionFind) Union(x, y int) bool {
 	rootX, rootY := uf.Find(x), uf.Find(y)
 	if rootX != rootY {
 		switch uf.rankType {
-		case RankNone:
-			uf.parent[rootX] = rootY
 		case RankHeight:
 			if uf.rank[rootX] == uf.rank[rootY] {
 				uf.rank[rootY]++
 			} else if uf.rank[rootX] > uf.rank[rootY] {
 				rootX, rootY = rootY, rootX
 			}
-			uf.parent[rootX] = rootY
 		case RankSize:
 			if uf.rank[rootX] >= uf.rank[rootY] {
 				rootX, rootY = rootY, rootX
 			}
-			uf.parent[rootX] = rootY
 			uf.rank[rootY] += uf.rank[rootX]
 		}
+		uf.parent[rootX] = rootY
 		uf.count--
 		return true
 	}
@@ -84,7 +81,7 @@ func (uf *ArrayUnionFind) IsConnected(x, y int) bool {
 
 //Count 连通树的数量
 func (uf *ArrayUnionFind) Count() int {
-	return uf.count
+	return uf.count + uf.cap - uf.size
 }
 
 //Size 结点总数
