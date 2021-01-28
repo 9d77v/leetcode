@@ -32,7 +32,7 @@ func NewArrayUnionFindWithRank(n int, rankType RankType) *ArrayUnionFind {
 	}
 	for i := 0; i < n; i++ {
 		uf.parent[i] = -1
-		uf.rank[i] = 1
+		uf.rank[i] = 0
 	}
 	return uf
 }
@@ -65,6 +65,9 @@ func (uf *ArrayUnionFind) Union(x, y int) bool {
 func (uf *ArrayUnionFind) Find(x int) int {
 	if uf.parent[x] == -1 {
 		uf.parent[x] = x
+		if uf.rankType != RankNone {
+			uf.rank[x] = 1
+		}
 		uf.count++
 		uf.size++
 	}
