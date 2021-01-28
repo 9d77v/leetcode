@@ -24,7 +24,6 @@ import (
 空间复杂度：О(n)
 运行时间：64 ms	内存消耗：8.7 MB
 */
-
 func accountsMerge(accounts [][]string) [][]string {
 	idStrMap, idMap := getIDMap(accounts)
 	uf := NewArrayUnionFind(len(idMap))
