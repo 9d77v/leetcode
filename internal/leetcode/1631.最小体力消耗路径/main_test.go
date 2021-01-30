@@ -43,3 +43,23 @@ func Test_minimumEffortPathFuc1(t *testing.T) {
 		})
 	}
 }
+
+func Test_minimumEffortPathFuc2(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotResult := minimumEffortPathFuc2(tt.args.heights); gotResult != tt.wantResult {
+				t.Errorf("minimumEffortPathFuc2() = %v, want %v", gotResult, tt.wantResult)
+			}
+		})
+	}
+}
+
+func Test_minimumEffortPathFuc3(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotResult := minimumEffortPathFuc3(tt.args.heights); gotResult != tt.wantResult {
+				t.Errorf("minimumEffortPathFuc3() = %v, want %v", gotResult, tt.wantResult)
+			}
+		})
+	}
+}

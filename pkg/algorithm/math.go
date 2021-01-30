@@ -44,3 +44,17 @@ func Reverse(a []int) {
 		a[i], a[n-1-i] = a[n-1-i], a[i]
 	}
 }
+
+//BinarySearch 二分查找
+func BinarySearch(n int, fn func(l, r, mid int) bool) int {
+	l, r := 0, n-1
+	for l < r {
+		mid := (l + r) >> 1
+		if !fn(l, r, mid) {
+			l = mid + 1
+		} else {
+			r = mid
+		}
+	}
+	return l
+}

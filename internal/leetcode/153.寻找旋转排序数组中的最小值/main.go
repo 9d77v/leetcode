@@ -1,6 +1,8 @@
 package main
 
-import "math"
+import (
+	. "github.com/9d77v/leetcode/pkg/algorithm"
+)
 
 /*
 题目：
@@ -22,21 +24,10 @@ nums 原来是一个升序排序的数组，但在预先未知的某个点上进
 方法一：二分查找
 时间复杂度：О(㏒n)
 空间复杂度：О(1)
-运行时间：4 ms	内存消耗：3.1 MB
+运行时间：0 ms	内存消耗：2.5 MB
 */
 func findMin(nums []int) int {
-	n := len(nums)
-	if len(nums) == 0 {
-		return math.MinInt64
-	}
-	l, r := 0, n-1
-	for l < r {
-		mid := l + (r-l)/2
-		if nums[mid] > nums[r] {
-			l = mid + 1
-		} else {
-			r = mid
-		}
-	}
-	return nums[l]
+	return nums[BinarySearch(len(nums), func(l, r, mid int) bool {
+		return nums[mid] < nums[r]
+	})]
 }
