@@ -27,8 +27,8 @@ Alice 和 Bob 共有一个无向图，其中包含 n 个节点和 3  种类型�
 */
 func maxNumEdgesToRemove(n int, edges [][]int) int {
 	result := len(edges)
-	var uf1 UnionFind = NewArrayUnionFindWithRank(n+1, RankSize)
-	var uf2 UnionFind = NewArrayUnionFindWithRank(n+1, RankSize)
+	var uf1 UnionFind = NewArrayUnionFind(n + 1)
+	var uf2 UnionFind = NewArrayUnionFind(n + 1)
 	for _, edge := range edges {
 		if edge[0] == 3 && !uf1.IsConnected(edge[1], edge[2]) {
 			uf1.Union(edge[1], edge[2])

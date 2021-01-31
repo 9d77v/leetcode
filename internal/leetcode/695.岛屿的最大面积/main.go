@@ -34,7 +34,7 @@ func maxAreaOfIsland(grid [][]int) (result int) {
 	if m == 0 {
 		return 0
 	}
-	var uf UnionFind = NewArrayUnionFindWithRank(m*n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(m * n)
 	for i := 0; i < n; i++ {
 		for j := 0; j < m; j++ {
 			if grid[i][j] == 1 {

@@ -11,28 +11,24 @@ type ArrayUnionFind struct {
 }
 
 //NewArrayUnionFind 初始化并查集
-func NewArrayUnionFind(n int) *ArrayUnionFind {
-	uf := &ArrayUnionFind{
-		parent: make([]int, n),
-		cap:    n,
+func NewArrayUnionFind(n int, rankType ...RankType) *ArrayUnionFind {
+	rt := RankSize
+	if len(rankType) > 0 {
+		rt = rankType[0]
 	}
-	for i := 0; i < n; i++ {
-		uf.parent[i] = -1
-	}
-	return uf
-}
-
-//NewArrayUnionFindWithRank 初始化带秩的并查集
-func NewArrayUnionFindWithRank(n int, rankType RankType) *ArrayUnionFind {
 	uf := &ArrayUnionFind{
 		parent:   make([]int, n),
-		rank:     make([]int, n),
-		rankType: rankType,
 		cap:      n,
+		rankType: rt,
+	}
+	if rt != RankNone {
+		uf.rank = make([]int, n)
 	}
 	for i := 0; i < n; i++ {
 		uf.parent[i] = -1
-		uf.rank[i] = 0
+		if rt != RankNone {
+			uf.rank[i] = 0
+		}
 	}
 	return uf
 }

@@ -26,7 +26,7 @@ func makeConnected(n int, connections [][]int) int {
 	if len(connections) < n-1 {
 		return -1
 	}
-	var uf UnionFind = NewArrayUnionFindWithRank(n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(n)
 	for _, conn := range connections {
 		if uf.Union(conn[0], conn[1]) {
 			n--

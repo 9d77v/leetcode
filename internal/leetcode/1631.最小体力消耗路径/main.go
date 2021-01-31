@@ -56,7 +56,7 @@ func minimumEffortPathFuc1(heights [][]int) int {
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i][2] < edges[j][2]
 	})
-	var uf UnionFind = NewArrayUnionFindWithRank(m*n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(m * n)
 	for _, edge := range edges {
 		if uf.Union(edge[0], edge[1]) {
 			if uf.IsConnected(0, m*n-1) {

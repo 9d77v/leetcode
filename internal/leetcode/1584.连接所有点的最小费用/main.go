@@ -64,7 +64,7 @@ func sortByLen(edges [][3]int) {
 }
 
 func calcCost(edges [][3]int, n int) (cost int) {
-	var uf UnionFind = NewArrayUnionFindWithRank(n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(n)
 	left := n - 1
 	for _, edge := range edges {
 		if uf.Union(edge[0], edge[1]) {

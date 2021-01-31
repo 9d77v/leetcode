@@ -131,7 +131,7 @@ func swimInWaterFunc3(grid [][]int) int {
 	}
 	var bfs func(mid int) bool
 	bfs = func(mid int) bool {
-		var uf UnionFind = NewArrayUnionFindWithRank(n*n, RankSize)
+		var uf UnionFind = NewArrayUnionFind(n * n)
 		for i := range grid {
 			for j := range grid[0] {
 				if grid[i][j] <= mid {
@@ -176,7 +176,7 @@ func swimInWaterFunc4(grid [][]int) int {
 			data[grid[i][j]] = index(i, j, m)
 		}
 	}
-	var uf UnionFind = NewArrayUnionFindWithRank(n*n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(n * n)
 	for num, value := range data {
 		i, j := value/n, value%n
 		for _, d := range directions {

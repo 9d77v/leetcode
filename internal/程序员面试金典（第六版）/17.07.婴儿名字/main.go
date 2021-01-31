@@ -31,7 +31,7 @@ func trulyMostPopular(names []string, synonyms []string) []string {
 		return names
 	}
 	idMap := make(map[string]int, 0)
-	var uf UnionFind = NewMapUnionFindWithRank(0, RankSize)
+	var uf UnionFind = NewMapUnionFind(0)
 	for _, synonym := range synonyms {
 		a, b := getSynonym(synonym)
 		if _, ok := idMap[a]; !ok {

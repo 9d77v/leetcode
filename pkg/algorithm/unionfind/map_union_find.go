@@ -10,21 +10,18 @@ type MapUnionFind struct {
 }
 
 //NewMapUnionFind 初始化并查集
-func NewMapUnionFind(n int) *MapUnionFind {
-	uf := &MapUnionFind{
-		parent: make(map[int]int, n),
-		cap:    n,
+func NewMapUnionFind(n int, rankType ...RankType) *MapUnionFind {
+	rt := RankSize
+	if len(rankType) > 0 {
+		rt = rankType[0]
 	}
-	return uf
-}
-
-//NewMapUnionFindWithRank 初始化带秩的并查集
-func NewMapUnionFindWithRank(n int, rankType RankType) *MapUnionFind {
 	uf := &MapUnionFind{
-		parent:   make(map[int]int, 0),
-		rank:     make(map[int]int, 0),
-		rankType: rankType,
+		parent:   make(map[int]int, n),
 		cap:      n,
+		rankType: rt,
+	}
+	if rt != RankNone {
+		uf.rank = make(map[int]int, 0)
 	}
 	return uf
 }

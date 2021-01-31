@@ -40,16 +40,16 @@ func findCriticalAndPseudoCriticalEdgesFunc1(n int, edges [][]int) [][]int {
 	sort.Slice(edges, func(i, j int) bool {
 		return edges[i][2] < edges[j][2]
 	})
-	mstValue := calcMST(NewArrayUnionFindWithRank(n, RankSize), -1, edges)
+	mstValue := calcMST(NewArrayUnionFind(n), -1, edges)
 	result := make([][]int, 2)
 	result[0] = []int{}
 	result[1] = []int{}
 	for i, edge := range edges {
-		if calcMST(NewArrayUnionFindWithRank(n, RankSize), i, edges) > mstValue {
+		if calcMST(NewArrayUnionFind(n), i, edges) > mstValue {
 			result[0] = append(result[0], edge[3])
 			continue
 		}
-		var uf2 UnionFind = NewArrayUnionFindWithRank(n, RankSize)
+		var uf2 UnionFind = NewArrayUnionFind(n)
 		uf2.Union(edge[0], edge[1])
 		if edge[2]+calcMST(uf2, i, edges) == mstValue {
 			result[1] = append(result[1], edge[3])

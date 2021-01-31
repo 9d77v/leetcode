@@ -31,7 +31,7 @@ func numIslands(grid [][]byte) int {
 	if m == 0 {
 		return 0
 	}
-	var uf UnionFind = NewArrayUnionFindWithRank(m*n, RankSize)
+	var uf UnionFind = NewArrayUnionFind(m * n)
 	for i := range grid {
 		for j := range grid[0] {
 			if grid[i][j] == '1' {
