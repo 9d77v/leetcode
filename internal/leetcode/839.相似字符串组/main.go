@@ -4,6 +4,12 @@ import (
 	. "github.com/9d77v/leetcode/pkg/algorithm/unionfind"
 )
 
+/*
+方法一：并查集
+时间复杂度：О(n^2m+nlogn)
+空间复杂度：О(n)
+运行时间：0 ms	内存消耗：2.6 MB
+*/
 func numSimilarGroups(strs []string) int {
 	n := len(strs)
 	var uf UnionFind = NewArrayUnionFind(n, RankSize)
