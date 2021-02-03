@@ -26,15 +26,35 @@ s 由英文字母、数字、符号和空格组成
 func lengthOfLongestSubstring(s string) int {
 	left, maxCnt, chMap := 0, 0, make(map[byte]int, 0)
 	for right, ch := range s {
-		if _, ok := chMap[byte(ch)]; ok {
-			newLeft := chMap[byte(ch)] + 1
-			for i := left; i < newLeft; i++ {
+		if pos, ok := chMap[byte(ch)]; ok {
+			for i := left; i <= pos; i++ {
 				delete(chMap, s[i])
 			}
-			left = newLeft
+			left = pos + 1
 		}
 		chMap[byte(ch)] = right
 		maxCnt = Max(maxCnt, right-left+1)
+	}
+	return maxCnt
+}
+
+/*
+方法二：双指针
+时间复杂度：О(n)
+空间复杂度：О(∣Σ∣)
+运行时间：12 ms	内存消耗：2.8 MB
+*/
+func lengthOfLongestSubstringFunc2(s string) int {
+	right, maxCnt, chMap, n := 0, 0, make(map[byte]int, 0), len(s)
+	for left := range s {
+		if left != 0 {
+			delete(chMap, s[left-1])
+		}
+		for right < n && chMap[s[right]] == 0 {
+			chMap[s[right]]++
+			right++
+		}
+		maxCnt = Max(maxCnt, right-left)
 	}
 	return maxCnt
 }
