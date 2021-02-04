@@ -1,9 +1,7 @@
 package main
 
 import (
-	"container/heap"
-
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
 	. "github.com/9d77v/leetcode/pkg/algorithm/unionfind"
 )
 
@@ -36,47 +34,21 @@ func smallestStringWithSwaps(s string, pairs [][]int) string {
 	}
 
 	arr := []byte(s)
-	hashMap := make(map[int]*hp, n)
+	hashMap := make(map[int]Heap, n)
 	for i := 0; i < n; i++ {
 		root := uf.Find(i)
 		if hashMap[root] != nil {
-			hashMap[root].push(arr[i])
+			hashMap[root].PushItem(arr[i])
 		} else {
-			minHeap := newHeap()
-			minHeap.push(arr[i])
+			minHeap := NewMinHeap()
+			minHeap.PushItem(arr[i])
 			hashMap[root] = minHeap
 		}
 	}
 	result := make([]byte, 0, n)
 	for i := 0; i < n; i++ {
 		root := uf.Find(i)
-		result = append(result, hashMap[root].pop())
+		result = append(result, hashMap[root].PopItem().(byte))
 	}
 	return string(result)
-}
-
-type hp struct {
-	*Heap
-}
-
-func newHeap() *hp {
-	hp := &hp{
-		Heap: NewHeap(0),
-	}
-	heap.Init(hp)
-	return hp
-}
-
-func (h *hp) Less(i, j int) bool {
-	return h.Data[i].(byte) < h.Data[j].(byte)
-}
-
-//push ..
-func (h *hp) push(v byte) {
-	heap.Push(h, v)
-}
-
-//pop ..
-func (h *hp) pop() byte {
-	return heap.Pop(h).(byte)
 }

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"container/heap"
 	"math"
 	"sort"
 
 	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
 )
 
 /*
@@ -15,112 +15,68 @@ import (
 运行时间：40 ms	内存消耗：6.5 MB
 */
 func maximumProduct(nums []int) int {
-	max1 := newMinHeap(3)
-	min1 := newMaxHeap(3)
-	max2 := newMaxHeap(2)
-	min2 := newMinHeap(3)
+	max1 := NewMinHeap(3)
+	min1 := NewMaxHeap(3)
+	max2 := NewMaxHeap(2)
+	min2 := NewMinHeap(3)
 	hasZero := false
 	for _, num := range nums {
 		if num > 0 {
 			if max1.Len() < 3 {
-				max1.push(num)
-				max2.push(num)
+				max1.PushItem(num)
+				max2.PushItem(num)
 			} else if num > max1.Peek().(int) {
-				max1.pop()
-				max1.push(num)
+				max1.PopItem()
+				max1.PushItem(num)
 			} else if num < max2.Peek().(int) {
-				max2.pop()
-				max2.push(num)
+				max2.PopItem()
+				max2.PushItem(num)
 			}
 		} else if num < 0 {
 			if min1.Len() < 2 {
-				min1.push(num)
+				min1.PushItem(num)
 			} else if num < min1.Peek().(int) {
-				min1.pop()
-				min1.push(num)
+				min1.PopItem()
+				min1.PushItem(num)
 			}
 			if min2.Len() < 3 {
-				min2.push(num)
+				min2.PushItem(num)
 			} else if num > min2.Peek().(int) {
-				min2.pop()
-				min2.push(num)
+				min2.PopItem()
+				min2.PushItem(num)
 			}
 		} else {
 			hasZero = true
 		}
 	}
 	if max1.Len() == 3 {
-		num1, num2, num3 := max1.pop(), max1.pop(), max1.pop()
+		num1, num2, num3 := max1.PopItem().(int), max1.PopItem().(int), max1.PopItem().(int)
 		max := num1 * num2 * num3
 		if min1.Len() == 2 {
-			max = Max(max, num3*min1.pop()*min1.pop())
+			max = Max(max, num3*min1.PopItem().(int)*min1.PopItem().(int))
 		}
 		return max
 	}
 	if max1.Len() == 2 {
 		if min1.Len() == 2 {
-			max1.pop()
-			return max1.pop() * min1.pop() * min1.pop()
+			max1.PopItem()
+			return max1.PopItem().(int) * min1.PopItem().(int) * min1.PopItem().(int)
 		}
 		if hasZero {
 			return 0
 		}
-		return max1.pop() * max1.pop() * min2.pop()
+		return max1.PopItem().(int) * max1.PopItem().(int) * min2.PopItem().(int)
 	}
 	if max1.Len() == 1 {
 		if min1.Len() == 2 {
-			return max1.pop() * min1.pop() * min1.pop()
+			return max1.PopItem().(int) * min1.PopItem().(int) * min1.PopItem().(int)
 		}
 		return 0
 	}
 	if hasZero {
 		return 0
 	}
-	return min2.pop() * min2.pop() * min2.pop()
-}
-
-type MaxHeap struct {
-	*Heap
-}
-
-func newMaxHeap(n int) *MaxHeap {
-	return &MaxHeap{
-		NewHeap(n),
-	}
-}
-
-func (hp *MaxHeap) Less(i, j int) bool {
-	return hp.Data[i].(int) > hp.Data[j].(int)
-}
-
-func (hp *MaxHeap) push(i int) {
-	heap.Push(hp, i)
-}
-
-func (hp *MaxHeap) pop() int {
-	return heap.Pop(hp).(int)
-}
-
-type MinHeap struct {
-	*Heap
-}
-
-func newMinHeap(n int) *MinHeap {
-	return &MinHeap{
-		NewHeap(n),
-	}
-}
-
-func (hp *MinHeap) Less(i, j int) bool {
-	return hp.Data[i].(int) < hp.Data[j].(int)
-}
-
-func (hp *MinHeap) push(i int) {
-	heap.Push(hp, i)
-}
-
-func (hp *MinHeap) pop() int {
-	return heap.Pop(hp).(int)
+	return min2.PopItem().(int) * min2.PopItem().(int) * min2.PopItem().(int)
 }
 
 /*

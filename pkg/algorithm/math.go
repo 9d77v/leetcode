@@ -38,6 +38,15 @@ func Abs(x int) int {
 	return x
 }
 
+//Median 中位数
+func Median(arr []int) float64 {
+	n := len(arr)
+	if n&1 == 1 {
+		return float64(arr[n>>1])
+	}
+	return float64(arr[n>>1]+arr[n>>1-1]) / 2
+}
+
 //Reverse 反转数组
 func Reverse(a []int) {
 	for i, n := 0, len(a); i < n/2; i++ {

@@ -1,10 +1,9 @@
 package main
 
 import (
-	"container/heap"
 	"sort"
 
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
 )
 
 /*
@@ -57,44 +56,18 @@ func lastStoneWeightFun2(stones []int) int {
 	if n == 1 {
 		return stones[0]
 	}
-	q := newHeap(stones)
-	for q.Len() > 1 {
-		x, y := q.pop(), q.pop()
+	var hp Heap = NewMaxHeap()
+	for _, v := range stones {
+		hp.PushItem(v)
+	}
+	for hp.Len() > 1 {
+		x, y := hp.PopItem().(int), hp.PopItem().(int)
 		if x > y {
-			q.push(x - y)
+			hp.PushItem(x - y)
 		}
 	}
-	if q.Len() > 0 {
-		return q.pop()
+	if hp.Len() > 0 {
+		return hp.PopItem().(int)
 	}
 	return 0
-}
-
-type hp struct {
-	*Heap
-}
-
-func newHeap(data []int) *hp {
-	hp := &hp{
-		Heap: NewHeap(len(data)),
-	}
-	for _, v := range data {
-		hp.push(v)
-	}
-	heap.Init(hp)
-	return hp
-}
-
-func (h *hp) Less(i, j int) bool {
-	return h.Data[i].(int) > h.Data[j].(int)
-}
-
-//push ..
-func (h *hp) push(v int) {
-	heap.Push(h, v)
-}
-
-//pop ..
-func (h *hp) pop() int {
-	return heap.Pop(h).(int)
 }

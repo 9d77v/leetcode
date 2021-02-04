@@ -1,9 +1,8 @@
 package main
 
 import (
-	"container/heap"
-
 	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
 	. "github.com/9d77v/leetcode/pkg/algorithm/queue"
 )
 
@@ -48,43 +47,20 @@ func maxSlidingWindowFunc0(nums []int, k int) []int {
 */
 func maxSlidingWindowFunc1(nums []int, k int) []int {
 	n := len(nums)
-	h := newHp(k)
+	var hp Heap = NewMaxHeap(k)
 	for i := 0; i < k; i++ {
-		h.push([2]int{i, nums[i]})
+		hp.PushItem([2]int{i, nums[i]})
 	}
 	res := make([]int, 1, n-k+1)
-	res[0] = h.Peek().([2]int)[1]
+	res[0] = hp.Peek().([2]int)[1]
 	for i := k; i < n; i++ {
-		h.push([2]int{i, nums[i]})
-		for h.Peek().([2]int)[0] <= i-k {
-			h.pop()
+		hp.PushItem([2]int{i, nums[i]})
+		for hp.Peek().([2]int)[0] <= i-k {
+			hp.PopItem()
 		}
-		res = append(res, h.Peek().([2]int)[1])
+		res = append(res, hp.Peek().([2]int)[1])
 	}
 	return res
-}
-
-type hp struct {
-	*Heap
-}
-
-func newHp(k int) *hp {
-	h := &hp{
-		Heap: NewHeap(k),
-	}
-	heap.Init(h)
-	return h
-}
-
-func (h *hp) Less(i, j int) bool {
-	return h.Data[i].([2]int)[1] > h.Data[j].([2]int)[1]
-}
-
-func (h *hp) push(item [2]int) {
-	heap.Push(h, item)
-}
-func (h *hp) pop() [2]int {
-	return heap.Pop(h).([2]int)
 }
 
 /*

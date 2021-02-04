@@ -1,9 +1,7 @@
 package main
 
 import (
-	"container/heap"
-
-	. "github.com/9d77v/leetcode/pkg/algorithm"
+	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
 )
 
 /*
@@ -32,41 +30,18 @@ func topKFrequentFunc1(nums []int, k int) []int {
 	for _, v := range nums {
 		freqMap[v]++
 	}
-	q := newHeap(k)
+	var hp Heap = NewMinHeap(k)
 	for key, value := range freqMap {
-		q.push([2]int{key, value})
-		if q.Len() > k {
-			q.pop()
+		hp.PushItem([2]int{key, value})
+		if hp.Len() > k {
+			hp.PopItem()
 		}
 	}
 	res := make([]int, k)
 	for i := 0; i < k; i++ {
-		res[i] = q.pop()[0]
+		res[i] = hp.PopItem().([2]int)[0]
 	}
 	return res
-}
-
-type hp struct {
-	*Heap
-}
-
-func newHeap(k int) *hp {
-	return &hp{
-		Heap: NewHeap(k),
-	}
-}
-
-//小顶堆
-func (h *hp) Less(i, j int) bool {
-	return h.Data[i].([2]int)[1] < h.Data[j].([2]int)[1]
-}
-
-func (h *hp) push(item [2]int) {
-	heap.Push(h, item)
-}
-
-func (h *hp) pop() [2]int {
-	return heap.Pop(h).([2]int)
 }
 
 /*
