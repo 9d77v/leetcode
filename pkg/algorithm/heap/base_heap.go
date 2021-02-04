@@ -103,7 +103,7 @@ func (h *BaseHeap) PopItem() interface{} {
 	return heap.Pop(h)
 }
 
-//Peek 获h取堆顶元素
+//Peek 获取堆顶元素
 func (h *BaseHeap) Peek() interface{} {
 	return h.data[0]
 }
