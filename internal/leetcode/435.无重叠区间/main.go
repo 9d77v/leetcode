@@ -43,7 +43,7 @@ func eraseOverlapIntervalsFunc1(intervals [][]int) int {
 			}
 		}
 	}
-	return n - Max(dp...)
+	return n - MaxArr(dp)
 }
 
 /*
