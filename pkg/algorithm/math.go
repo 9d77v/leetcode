@@ -17,7 +17,7 @@ func Min(a, b int) int {
 }
 
 //MaxArr return the maximum number
-func MaxArr(a []int) int {
+func MaxArr(a ...int) int {
 	max := a[0]
 	for _, v := range a[1:] {
 		if v > max {
@@ -28,7 +28,7 @@ func MaxArr(a []int) int {
 }
 
 //MinArr return the minimum number
-func MinArr(a []int) int {
+func MinArr(a ...int) int {
 	min := a[0]
 	for _, v := range a[1:] {
 		if v < min {
