@@ -136,5 +136,5 @@ func maxProfitFunc3(k int, prices []int) int {
 			sell[j] = Max(sell[j], buy[j-1]+prices[i])
 		}
 	}
-	return MaxArr(sell)
+	return MaxArr(sell...)
 }

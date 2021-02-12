@@ -77,9 +77,8 @@ func maxTurbulenceSizeFunc2(arr []int) int {
 运行时间：80 ms	内存消耗：7 MB
 */
 func maxTurbulenceSizeFunc3(arr []int) int {
-	n := len(arr)
 	up, down, max := 1, 1, 1
-	for i := 1; i < n; i++ {
+	for i := 1; i < len(arr); i++ {
 		if arr[i-1] < arr[i] {
 			up, down = down+1, 1
 		} else if arr[i-1] > arr[i] {

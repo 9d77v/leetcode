@@ -32,7 +32,7 @@ func maxSlidingWindowFunc0(nums []int, k int) []int {
 	for i := 0; i < len(nums); i++ {
 		tempArr[cur] = nums[i]
 		if i >= k-1 {
-			res = append(res, MaxArr(tempArr))
+			res = append(res, MaxArr(tempArr...))
 		}
 		cur = (cur + 1) % k
 	}
