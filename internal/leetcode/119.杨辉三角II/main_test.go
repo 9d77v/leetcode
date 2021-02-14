@@ -40,3 +40,13 @@ func Test_getRowFunc2(t *testing.T) {
 		})
 	}
 }
+
+func Test_getRowFunc3(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getRowFunc3(tt.args.rowIndex); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getRowFunc3() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

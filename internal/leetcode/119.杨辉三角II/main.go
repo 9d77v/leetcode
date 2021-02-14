@@ -57,10 +57,11 @@ func getRowFunc2(rowIndex int) []int {
 运行时间：0 ms	内存消耗：1.9 MB
 */
 func getRowFunc3(rowIndex int) []int {
-	row := make([]int, rowIndex+1)
+	k := rowIndex + 1
+	row := make([]int, k)
 	row[0] = 1
-	for i := 1; i <= rowIndex; i++ {
-		row[i] = row[i-1] * (rowIndex - i + 1) / i
+	for i := 1; i < k; i++ {
+		row[i] = row[i-1] * (k - i) / i
 	}
 	return row
 }

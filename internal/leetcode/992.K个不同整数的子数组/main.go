@@ -35,7 +35,6 @@ func atMostKDistinct(A []int, K int) int {
 			count++
 		}
 		freq[A[right]]++
-		right++
 		for count > K {
 			freq[A[left]]--
 			if freq[A[left]] == 0 {
@@ -43,7 +42,7 @@ func atMostKDistinct(A []int, K int) int {
 			}
 			left++
 		}
-		res += right - left
+		res += right - left + 1
 	}
 	return res
 }

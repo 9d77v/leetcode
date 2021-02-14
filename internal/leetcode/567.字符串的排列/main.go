@@ -26,12 +26,12 @@ func checkInclusion(s1 string, s2 string) bool {
 		return false
 	}
 	cnt := [26]int{}
-	for _, ch := range s1 {
-		cnt[ch-'a']--
+	for i := range s1 {
+		cnt[s1[i]-'a']--
 	}
 	left := 0
-	for right, ch := range s2 {
-		x := ch - 'a'
+	for right := range s2 {
+		x := s2[right] - 'a'
 		cnt[x]++
 		for cnt[x] > 0 {
 			cnt[s2[left]-'a']--
