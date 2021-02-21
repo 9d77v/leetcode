@@ -34,7 +34,7 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	for i, v := range nums1 {
 		nums1Map[v] = i + 1
 	}
-	monotonicStack := NewMonotonicStack(NewSliceStack(n), false)
+	monotonicStack := NewMonotonicDecreasingStack(NewSliceStack(n))
 	monotonicStack.Execute(nums2, func(topIndex, topValue, i int) {
 		if nums1Map[topValue] != 0 {
 			arr[nums1Map[topValue]-1] = nums2[i]

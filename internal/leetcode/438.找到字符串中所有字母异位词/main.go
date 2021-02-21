@@ -22,23 +22,23 @@ package main
 运行时间：20 ms	内存消耗：5 MB
 */
 func findAnagrams(s string, p string) []int {
-	chArr, m, result := [26]int{}, len(p), []int{}
+	chMap, m, result := make(map[byte]int, 0), len(p), make([]int, 0)
 	count := m
 	for i := range p {
-		chArr[p[i]-'a']++
+		chMap[p[i]]++
 	}
 	for right := range s {
-		if chArr[s[right]-'a'] > 0 {
-			chArr[s[right]-'a']--
-			if chArr[s[right]-'a'] >= 0 {
+		if _, ok := chMap[s[right]]; ok {
+			chMap[s[right]]--
+			if chMap[s[right]] >= 0 {
 				count--
 			}
 		}
 		left := right - m
 		if left >= 0 {
-			if chArr[s[left]-'a'] > 0 {
-				chArr[s[left]-'a']++
-				if chArr[s[left]-'a'] > 0 {
+			if _, ok := chMap[s[left]]; ok {
+				chMap[s[left]]++
+				if chMap[s[left]] > 0 {
 					count++
 				}
 			}

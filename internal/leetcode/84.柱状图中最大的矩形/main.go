@@ -86,7 +86,7 @@ func largestRectangleAreaFunc2(heights []int) (max int) {
 */
 func largestRectangleAreaFunc3(heights []int) (max int) {
 	heights = append(heights, -1)
-	monotonicStack := NewMonotonicStack(NewSliceStack(len(heights)), true)
+	monotonicStack := NewMonotonicIncreasingStack(NewSliceStack(len(heights)))
 	monotonicStack.Execute(heights, func(topIndex, topValue, i int) {
 		right := i - 1
 		left := 0

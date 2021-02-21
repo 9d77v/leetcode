@@ -9,9 +9,9 @@ type SliceStack struct {
 }
 
 //NewSliceStack 初始化栈
-func NewSliceStack(len int, data ...interface{}) *SliceStack {
+func NewSliceStack(n int, data ...interface{}) *SliceStack {
 	s := &SliceStack{
-		data:  make([]interface{}, 0, len),
+		data:  make([]interface{}, 0, n),
 		mutex: &sync.Mutex{},
 	}
 	for _, v := range data {

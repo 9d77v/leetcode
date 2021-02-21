@@ -6,11 +6,19 @@ type MonotonicStack struct {
 	IsAsc bool
 }
 
-//NewMonotonicStack 初始化单调栈
-func NewMonotonicStack(stack Stack, isAsc bool) *MonotonicStack {
+//NewMonotonicIncreasingStack 初始化单调递增栈
+func NewMonotonicIncreasingStack(stack Stack) *MonotonicStack {
 	return &MonotonicStack{
 		Stack: stack,
-		IsAsc: isAsc,
+		IsAsc: true,
+	}
+}
+
+//NewMonotonicDecreasingStack 初始化单调递减栈
+func NewMonotonicDecreasingStack(stack Stack) *MonotonicStack {
+	return &MonotonicStack{
+		Stack: stack,
+		IsAsc: false,
 	}
 }
 

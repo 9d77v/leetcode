@@ -25,11 +25,11 @@ n == height.length
 运行时间：4 ms	内存消耗：3.1 MB
 */
 func trapFunc1(height []int) (max int) {
-	monotonicStack := NewMonotonicStack(NewSliceStack(len(height)), false)
-	monotonicStack.Execute(height, func(topIndex, topValue, i int) {
-		if !monotonicStack.IsEmpty() {
-			d := i - monotonicStack.Peek().(int) - 1
-			min := Min(height[monotonicStack.Peek().(int)], height[i])
+	stack := NewMonotonicDecreasingStack(NewSliceStack(len(height)))
+	stack.Execute(height, func(topIndex, topValue, i int) {
+		if !stack.IsEmpty() {
+			d := i - stack.Peek().(int) - 1
+			min := Min(height[stack.Peek().(int)], height[i])
 			max += d * (min - topValue)
 		}
 	})
