@@ -1,9 +1,5 @@
 package main
 
-import (
-	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
-)
-
 /*
 题目：
 给定两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。找到 nums1 中每个元素在 nums2 中的下一个比其大的值。
@@ -34,11 +30,16 @@ func nextGreaterElement(nums1 []int, nums2 []int) []int {
 	for i, v := range nums1 {
 		nums1Map[v] = i + 1
 	}
-	monotonicStack := NewMonotonicDecreasingStack(NewSliceStack(n))
-	monotonicStack.Execute(nums2, func(topIndex, topValue, i int) {
-		if nums1Map[topValue] != 0 {
-			arr[nums1Map[topValue]-1] = nums2[i]
+	stack := make([]int, 0, len(nums2))
+	for i, num := range nums2 {
+		for len(stack) > 0 && nums2[stack[len(stack)-1]] < num {
+			topValue := nums2[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			if nums1Map[topValue] != 0 {
+				arr[nums1Map[topValue]-1] = nums2[i]
+			}
 		}
-	})
+		stack = append(stack, i)
+	}
 	return arr
 }

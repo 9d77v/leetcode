@@ -1,9 +1,5 @@
 package main
 
-import (
-	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
-)
-
 /*
 题目：
 请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替。
@@ -24,9 +20,14 @@ import (
 */
 func dailyTemperatures(T []int) []int {
 	result := make([]int, len(T))
-	monotonicStack := NewMonotonicDecreasingStack(NewSliceStack(len(T)))
-	monotonicStack.Execute(T, func(topIndex, topValue, i int) {
-		result[topIndex] = i - topIndex
-	})
+	stack := make([]int, 0, len(T))
+	for i, t := range T {
+		for len(stack) > 0 && T[stack[len(stack)-1]] < t {
+			topIndex := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			result[topIndex] = i - topIndex
+		}
+		stack = append(stack, i)
+	}
 	return result
 }

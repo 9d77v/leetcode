@@ -2,7 +2,6 @@ package main
 
 import (
 	. "github.com/9d77v/leetcode/pkg/algorithm"
-	. "github.com/9d77v/leetcode/pkg/algorithm/stack"
 )
 
 /*
@@ -25,13 +24,19 @@ n == height.length
 运行时间：4 ms	内存消耗：3.1 MB
 */
 func trapFunc1(height []int) (max int) {
-	stack := NewMonotonicDecreasingStack(NewSliceStack(len(height)))
-	stack.Execute(height, func(topIndex, topValue, i int) {
-		if !stack.IsEmpty() {
-			d := i - stack.Peek().(int) - 1
-			min := Min(height[stack.Peek().(int)], height[i])
-			max += d * (min - topValue)
+	stack := make([]int, 0, len(height))
+	for i, h := range height {
+		for len(stack) > 0 && height[stack[len(stack)-1]] < h {
+			topValue := height[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			if len(stack) > 0 {
+				top := stack[len(stack)-1]
+				d := i - top - 1
+				min := Min(height[top], height[i])
+				max += d * (min - topValue)
+			}
 		}
-	})
+		stack = append(stack, i)
+	}
 	return
 }
