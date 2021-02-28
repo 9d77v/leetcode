@@ -1,5 +1,10 @@
 package algorithm
 
+import (
+	"math/rand"
+	"time"
+)
+
 //Max return the maximum number
 func Max(a, b int) int {
 	if a > b {
@@ -65,7 +70,7 @@ func Median(arr []int) float64 {
 
 //Reverse 反转数组
 func Reverse(a []int) {
-	for i, n := 0, len(a); i < n/2; i++ {
+	for i, n := 0, len(a); i < n>>1; i++ {
 		a[i], a[n-1-i] = a[n-1-i], a[i]
 	}
 }
@@ -82,4 +87,57 @@ func BinarySearch(n int, fn func(l, r, mid int) bool) int {
 		}
 	}
 	return l
+}
+
+//Partition 分区
+func Partition(nums []int, left, right int) int {
+	pivot, i := nums[left], left
+	for i < right {
+		for nums[right] >= pivot && i < right {
+			right--
+		}
+		for nums[i] <= pivot && i < right {
+			i++
+		}
+		nums[i], nums[right] = nums[right], nums[i]
+	}
+	nums[left], nums[i] = nums[i], nums[left]
+	return i
+}
+
+//RandomPartition 随机分区
+func RandomPartition(nums []int, left, right int) int {
+	rand.Seed(time.Now().UnixNano())
+	picked := left + rand.Int()%(right-left+1)
+	nums[picked], nums[left] = nums[left], nums[picked]
+	return Partition(nums, left, right)
+}
+
+//QuickSort 快排
+func QuickSort(nums []int) {
+	n := len(nums)
+	if n <= 1 {
+		return
+	}
+	qsort(nums, 0, n-1)
+}
+
+func qsort(nums []int, left, right int) {
+	i := RandomPartition(nums, left, right)
+	if i > left {
+		qsort(nums, left, i-1)
+	}
+	if i < right {
+		qsort(nums, i+1, right)
+	}
+}
+
+//QuickSelect 快排变形求第k大
+func QuickSelect(nums []int, k, left, right int) {
+	i := RandomPartition(nums, left, right)
+	if i > k {
+		QuickSelect(nums, k, left, i-1)
+	} else if i < k {
+		QuickSelect(nums, k, i+1, right)
+	}
 }
