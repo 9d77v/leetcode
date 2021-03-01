@@ -19,6 +19,14 @@ int sumRange(int i, int j) 返回数组 nums 从索引 i 到 j（i ≤ j）
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/range-sum-query-immutable
 */
+
+/*
+方法一: 前缀和
+时间复杂度：О(n)
+空间复杂度：О(n)
+运行时间：32 ms	内存消耗：9.4 MB
+*/
+
 type NumArray struct {
 	preSum []int
 }
