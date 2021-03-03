@@ -1,8 +1,8 @@
 package main
 
-import (
-	. "github.com/9d77v/leetcode/pkg/algorithm"
-)
+// import (
+// 	. "github.com/9d77v/leetcode/pkg/algorithm"
+// )
 
 /*
 题目：寻找旋转排序数组中的最小值
@@ -27,7 +27,14 @@ nums 原来是一个升序排序的数组，但在预先未知的某个点上进
 运行时间：0 ms	内存消耗：2.5 MB
 */
 func findMin(nums []int) int {
-	return nums[BinarySearch(len(nums), func(l, r, mid int) bool {
-		return nums[mid] < nums[r]
-	})]
+	l, r := 0, len(nums)-1
+	for l < r {
+		mid := int(uint(l+r) >> 1)
+		if nums[mid] >= nums[r] {
+			l = mid + 1
+		} else {
+			r = mid
+		}
+	}
+	return nums[l]
 }
