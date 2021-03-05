@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 type args struct {
 	nums   []int
@@ -21,6 +23,16 @@ func Test_search(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := search(tt.args.nums, tt.args.target); got != tt.want {
 				t.Errorf("search() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_searchFunc2(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := searchFunc2(tt.args.nums, tt.args.target); got != tt.want {
+				t.Errorf("searchFunc2() = %v, want %v", got, tt.want)
 			}
 		})
 	}

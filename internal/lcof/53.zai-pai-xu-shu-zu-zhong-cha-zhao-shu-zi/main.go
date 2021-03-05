@@ -14,8 +14,8 @@ import "sort"
 */
 
 /*
-方法一：二分查找
-时间复杂度：О(logn)
+方法一：二分查找后左右扫描
+时间复杂度：О(n)
 空间复杂度：О(1)
 运行时间：8 ms	内存消耗：3.9 MB
 */
@@ -40,4 +40,27 @@ func search(nums []int, target int) int {
 		}
 	}
 	return count
+}
+
+/*
+方法二：二分查找左右边界
+时间复杂度：О(n)
+空间复杂度：О(1)
+运行时间：8 ms	内存消耗：3.9 MB
+*/
+func searchFunc2(nums []int, target int) int {
+	return binarySearch(nums, target) - binarySearch(nums, target-1)
+}
+
+func binarySearch(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		mid := int(uint(l+r) >> 1)
+		if nums[mid] > target {
+			r = mid - 1
+		} else {
+			l = mid + 1
+		}
+	}
+	return l
 }
