@@ -20,23 +20,23 @@ func permuteUnique(nums []int) [][]int {
 	sort.Ints(nums)
 	n := len(nums)
 	result := make([][]int, 0)
-	perm := []int{}
+	path := []int{}
 	visited := make([]bool, n)
-	var backtrack func(x int)
-	backtrack = func(x int) {
-		if x == n {
-			result = append(result, append([]int(nil), perm...))
+	var backtrack func(int)
+	backtrack = func(depth int) {
+		if depth == n {
+			result = append(result, append([]int(nil), path...))
 			return
 		}
 		for i, v := range nums {
 			if visited[i] || i > 0 && !visited[i-1] && v == nums[i-1] {
 				continue
 			}
-			perm = append(perm, v)
+			path = append(path, v)
 			visited[i] = true
-			backtrack(x + 1)
+			backtrack(depth + 1)
 			visited[i] = false
-			perm = perm[:len(perm)-1]
+			path = path[:len(path)-1]
 		}
 	}
 	backtrack(0)
