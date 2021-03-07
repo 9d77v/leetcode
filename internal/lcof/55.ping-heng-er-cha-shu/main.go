@@ -42,7 +42,7 @@ func maxDepth(root *TreeNode) int {
 }
 
 /*
-方法二：调用二叉树最大深度
+方法二：递归
 时间复杂度：О(n)
 空间复杂度：О(n)
 运行时间：12 ms	内存消耗：6.1 MB
