@@ -28,3 +28,23 @@ func Test_partition(t *testing.T) {
 		})
 	}
 }
+
+func Test_partitionFunc2(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := partitionFunc2(tt.args.s); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("partitionFunc2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_partitionFunc3(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := partitionFunc3(tt.args.s); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("partitionFunc3() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
