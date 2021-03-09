@@ -7,7 +7,7 @@ type MonotonicQueue struct {
 }
 
 //NewMonotonicQueue 初始化单调队列
-func NewMonotonicQueue(deque Deque, isAsc bool) *MonotonicQueue {
+func NewMonotonicQueued(deque Deque, isAsc bool) *MonotonicQueue {
 	return &MonotonicQueue{
 		Deque: deque,
 		IsAsc: isAsc,

@@ -3,7 +3,6 @@ package main
 import (
 	. "github.com/9d77v/leetcode/pkg/algorithm"
 	. "github.com/9d77v/leetcode/pkg/algorithm/heap"
-	. "github.com/9d77v/leetcode/pkg/algorithm/queue"
 )
 
 /*
@@ -67,15 +66,24 @@ func maxSlidingWindowFunc1(nums []int, k int) []int {
 方法二：单调队列
 时间复杂度：О(n)
 空间复杂度：O(k)
-运行时间：284 ms	内存消耗：13 MB
+运行时间：296 ms	内存消耗：9.2 MB
 */
 func maxSlidingWindowFunc2(nums []int, k int) []int {
-	monotonicQueue := NewMonotonicQueue(NewSliceDeque(k), false)
-	res := make([]int, 0, len(nums)-k+1)
-	monotonicQueue.Execute(nums, func(fronIndex, frontValue int) {
-		res = append(res, frontValue)
-	})
-	return res
+	result := make([]int, 0, len(nums)-k+1)
+	deque := make([]int, 0, k)
+	for i, num := range nums {
+		for len(deque) > 0 && nums[deque[len(deque)-1]] < num {
+			deque = deque[:len(deque)-1]
+		}
+		deque = append(deque, i)
+		if deque[0] == i-k {
+			deque = deque[1:]
+		}
+		if i >= k-1 {
+			result = append(result, nums[deque[0]])
+		}
+	}
+	return result
 }
 
 /*
